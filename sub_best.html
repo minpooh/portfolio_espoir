@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+	<title>espoir</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /*############### reset ###############*/
+            *{margin:0; padding:0;}
+            li{list-style-type:none;}
+            a:link, a:visited{text-decoration:none; color:#333;}
+            h3{width:1px; height:1px; position:absolute; left:-9999px; font-size:1px;}
+        
+        /*############### wrap ################*/
+            #wrap{width:100%;}
+
+        /*############## header ##############*/
+            #header{width:100%;}
+            h1{position:fixed; left:50px; top:50px; z-index:1;}
+
+            .nav_m_btn{display:none; position:fixed; left:15px; top:60px; z-index:1; font-family:'Oswald', sans-serif; font-weight:400;}
+
+        /*############## header / nav / nav(div) ##############*/
+            nav{width:100%;}
+
+            #nav{width:100%; height:100px; position:absolute; left:0; top:0; z-index:3;}
+            #nav_tit, #nav_inn_shop, #nav_inn_artist, #nav_inn_play, #nav_inn_community{width:60%; position:absolute; left:25%; top:50px; z-index:2;}
+            #nav_tit li{width:25%; text-align:center; float:left; transition:transform 0.5s linear 0.2s;}
+			
+			#nav_tit{transform:rotatex(0deg); transition:transform 0.3s linear;}
+			#nav_inn_shop, #nav_inn_artist, #nav_inn_play, #nav_inn_community{transform:rotatex(-90deg); transition:transform 0.3s linear;}
+
+            #nav ol li{text-align:center; float:left; height:30px;}
+            #nav_inn_shop li{width:16%;}
+            #nav_inn_community li{width:20%;}
+            #nav_inn_artist li, #nav_inn_play li{width:40%;}
+
+            #nav ul li a, #nav ol li a{padding:0 10px; color:#ddd; text-transform:uppercase; }
+            #nav ul li a:link, #nav ul li a:visited, #nav ol li a:link, #nav ol li a:visited{font-size:20px; font-family:'Oswald', sans-serif; font-weight:500; letter-spacing:1px;}
+            #nav ul li a:hover, #nav ul li a:focus, #nav ol li a:hover, #nav ol li a:focus{color:#f00;}
+        
+
+            #nav:after, #nav ul:after{content:""; display:block; clear:both;}
+
+            #top_menu{width:10%; position:fixed; right:30px; top:50px; z-index:3;}
+            #top_menu p{width:50%; float:left; font-size:15px; font-weight:500;}
+            #top_menu p a:link, #top_menu a:visited{color:#ddd;}
+            #top_menu p a:hover, #top_menu a:focus{color:#f00;}
+            
+            #top_menu:after{content:""; display:block; clear:both;}
+            
+            
+        /*############## header / nav / nav_m(div) ##############*/
+            #nav_m{width:320px; position:fixed; left:-320px; top:0; z-index:2; transition:all 0.5s linear;}
+            #nav_m ul{width:100%; padding-top:20px; padding-bottom:20px; background-color:#Fff;}
+            #nav_m ul li{width:100%; text-indent:20px;}
+
+            #nav_m ul li a{text-transform:uppercase;}
+            #nav_m ul li a:link, a:visited{font-size:15px; font-family:'Oswald', sans-serif; letter-spacing:1px;}
+            #nav_m ul li a:hover, a:focus{background-color:#333; color:#fff;}
+
+            #nav_m ul .tit a:link, a:visited{font-size:20px; font-weight:500;}
+
+
+
+
+        /*############# container ############*/
+            #container{width:100%;}
+        
+        /*############### main #############*/
+            #main{width:100%; height:800px; overflow:hidden; position:relative;}
+           
+            #main .bg{width:100%;}
+            #main .main_bg_m{display:none;}
+            #main .bg img{width:120%;}
+
+
+            #main .title{width:250px; color:#fff; float:left; position:absolute; left:50px; top:300px;}
+            #main .title h2{font-size:100px; font-family:'Oswald', sans-serif; font-weight:500;}
+            #main .title .select{width:220px; height:50px; border:1px solid #fff; float:left;}
+            #main .title select{display:block; width:200px; padding-right:20px; height:100%; text-indent:20px; line-height:50px; background-color:rgba(0,0,0,0); color:#fff; text-transform:uppercase; font-size:16px; border:none;}
+
+
+            #main .product_best{width:1030px; height:650px; overflow:hidden; position:absolute; left:450px; top:100px;}
+            #main .product_best ul{width:1500px; text-align:center; color:#fff;}
+            #main .product_best li{width:300px; float:left;}
+            #main .product_best li .img{width:100%;}
+            #main .product_best li .img a{display:block; width:100%;}
+            #main .product_best li .img a img{width:100%;}
+
+            #main .product_best li .desc{width:100%; height:130px;}
+            #main .product_best li .name{font-size:20px; font-weight:600;}
+            #main .product_best li .tag{font-size:14px; line-height:40px;}
+            #main .product_best li .price{font-size:16px; line-height:30px;}
+            #main .product_best li .price .line{text-decoration:line-through; color:#ccc;}
+            #main .product_best li .price .sale{color:#f00;}
+            #main .product_best li .price strong{font-size:20px;}
+
+            #main .product_best .btn{width:100px; height:34px; margin:0 auto;}
+            #main .product_best .btn li{width:34px; height:100%; float:left;}
+            #main .product_best .btn li a{display:block; width:34px; padding:0 10px;}
+            #main .product_best .btn li img{width:50%;}
+
+            #main div:after{content:""; display:block; clear:both;}
+
+        /*############## product #############*/
+            #product{width:100%; padding-top:100px; background-color:#f7f5f5;}
+			#product_inn{width:1280px;  margin:0 auto; overflow:hidden;}
+            #product ul{width:1500px; overflow:hidden; padding-top:10px; padding-left:10px; color:#333;}
+            #product li{width:300px; position:relative; margin-right:20px; margin-bottom:70px; float:left;}
+            #product li .img{width:250px; padding:25px;}
+            #product li .img a{display:block; width:100%;}
+            #product li .img a img{width:100%;}
+
+        
+            #product li .desc{width:100%; height:180px; padding-top:30px;}
+            #product li .name{height:62px; font-size:18px;}
+            #product li .tag{font-size:15px; height:40px; line-height:40px; color:#777;}
+
+            #product li .color{width:100%; height:50px;}
+            #product li .color span{display:inline-block; width:26px; height:26px; border-radius:13px; margin-right:10px; background-color:rgb(255, 235, 218);}
+            
+            
+            #product li:nth-child(1) .color .color0{background-color:#ead3c3;}
+            #product li:nth-child(1) .color .color1{background-color:#ead1b9;}
+            #product li:nth-child(1) .color .color2{background-color:#e7c7ad;}
+            #product li:nth-child(1) .color .color3{background-color:#e3c2a3;}
+            #product li:nth-child(1) .color .color4{background-color:#e1b396;}
+            
+
+            #product li .price{font-size:16px; line-height:30px;}
+            #product li .price .line{text-decoration:line-through; color:#ccc;}
+            #product li .price .sale{color:#f00;}
+            #product li .price strong{font-size:20px;}
+
+            #product li .basket{position:absolute; right:10px; bottom:10px;}
+
+            #product .first{width:407px; background-color:#f7f5f5;  text-align:center; margin-right:20px; margin-bottom:20px;}
+            #product .first .img{width:200px; margin:0 auto;}
+            #product .first .desc{padding-top:0; padding-bottom:20px;}
+            #product .first .name{font-size:24px; padding:0 20px;}
+            #product .first .basket{position:static; margin:0 auto 20px;}
+
+        
+        /*############## footer ##############*/
+            #footer{width:100%; background-color:#000;}
+
+        /*############## footer / topMenu ##############*/
+            #footer .topMenu{width:1280px; height:300px; padding-top:50px; margin:0 auto;}
+            #footer .topMenu ul{float:left;}
+            #footer .topMenu ul li{margin-right:50px;}
+            #footer .topMenu a{color:#fff;}
+            
+            #footer .topMenu .left{width:300px;}
+            #footer .topMenu .left li{width:250px; line-height:40px;}
+            #footer .topMenu .left li a{font-size:17px;}
+
+            #footer .topMenu .right{width:700px;}
+            #footer .topMenu .right li{width:300px; float:left;}
+            
+            #footer .topMenu .right .title{font-size:20px;}
+            #footer .topMenu .right .title a{display:block;}
+            #footer .topMenu .right .title a span{display:block; padding-bottom:30px;}
+            #footer .topMenu .right .title a strong{display:block; font-size:25px;}
+            #footer .topMenu .right .text{padding-top:30px; color:#aaa; font-size:14px; line-height:20px;}
+            
+
+            #footer .topMenu .contact{width:280px;}
+            #footer .topMenu .contact li{margin:8px; float:left;}
+            #footer .topMenu .contact li a{display:block; width:27px; height:27px;}
+            #footer .topMenu .contact li a img{width:100%;}
+
+        /*############## footer / infoMenu ##############*/
+            #footer .infoMenu{width:1280px; margin:0 auto 20px;}
+            #footer .infoMenu ul{width:100%}
+            #footer .infoMenu li{display:inline;}
+            #footer .infoMenu li a{color:#fff; font-size:13px; padding-right:10px;}
+
+        /*############## footer / address ##############*/
+            #footer address{width:1280px; margin:0 auto; color:#aaa; font-style:normal; font-size:13px;}
+            #footer address p{display:inline; padding-right:10px;}
+            #footer address p a{color:#fff; text-decoration:underline;}
+        /*############## footer / copyright ##############*/
+            #copyright{width:100%;}
+            #copyright p{width:1280px; margin:0 auto; line-height:100px; font-size:13px; color:#aaa;}
+
+
+            
+        /*############## pc버전 #############*/
+		@media all and (min-width:1025px){
+            
+            /*############## product #############*/
+                #product li .img:hover{box-shadow:0 0 10px rgba(0,0,0,0.3); background-color:#fff;}
+
+                #product .first:hover{box-shadow:0 0 10px rgba(0,0,0,0.3); background-color:#fff;}
+                #product .first:hover .img{box-shadow:0 0 0 rgba(0,0,0,0);}
+        }
+
+        /*############## 스마트폰 가로버전 #############*/
+		@media all and (min-width:481px) and (max-width:767px){
+
+            /*############## header ##############*/
+                #header{width:100%;}
+                h1{width:80px; left:15px; top:15px;}
+                h1 a img{width:100%;}
+
+            /*############### main #############*/
+                #main{width:100%; overflow:static; height:600px;}
+
+                #main .main_bg{display:none;}
+                #main .main_bg_m{display:block;}
+
+
+                #main .title{width:200px; color:#fff; left:50%; top:100px; transform:translatex(-100px);}
+                #main .title h2{font-size:60px; text-align:center;}
+                #main .title .select{width:200px; height:40px; border:1px solid #fff; margin:0 auto;}
+                #main .title select{display:block; width:180px; padding-right:10px; height:100%; text-indent:10px; line-height:40px; background-color:rgba(0,0,0,0); color:#fff; text-transform:uppercase; font-size:14px; border:none;}
+
+
+                #main .product_best{width:300px; height:600px; overflow:hidden; left:50%; top:230px; transform:translatex(-150px);}
+                #main .product_best ul{width:300px; text-align:center; color:#fff; margin:0 auto;}
+                #main .product_best li{width:100%; float:none;}
+                #main .product_best li .img{width:180px; margin:0 auto;}
+
+                #main .product_best li .desc{width:100%; height:130px;}
+                #main .product_best li .name{font-size:17px; font-weight:500;}
+                #main .product_best li .tag{font-size:13px; line-height:30px;}
+                #main .product_best li .price{font-size:13px; line-height:30px;}
+                #main .product_best li .price .line{text-decoration:line-through; color:#ccc;}
+                #main .product_best li .price .sale{color:#f00;}
+                #main .product_best li .price strong{font-size:15px;}
+
+                #main .product_best .btn{width:100px; height:20px; margin:0 auto;}
+                #main .product_best .btn li{width:16px; height:100%; float:left;}
+                #main .product_best .btn li a{display:block; width:16px; padding:0 10px;}
+                #main .product_best .btn li img{width:100%;}
+
+                #main div:after{content:""; display:block; clear:both;}
+
+            /*############## product #############*/
+                #product{width:100%; padding-top:50px; background-color:#f7f5f5;}
+                #product_inn{width:480px;  margin:0; overflow:hidden;}
+                #product ul{width:480px; overflow:hidden; padding-top:10px; padding-left:10px; color:#333;}
+                #product li{width:240px; position:relative; margin-right:0; margin-bottom:20px; background-color:#f7f5f5; text-align:center;}
+                #product li .img{width:190px; margin:0 auto; padding:25px; }
+                #product li .img a{display:block; width:100%;}
+                #product li .img a img{width:100%;}
+
+                
+
+                #product li .desc{width:100%; height:180px; padding-top:30px;}
+                #product li .name{font-size:16px;}
+                #product li .tag{font-size:15px; line-height:40px; color:#777;}
+
+                #product li .color{width:100%; height:50px;}
+                #product li .color span{display:inline-block; width:26px; height:26px; border-radius:13px; margin-right:10px; background-color:rgb(255, 235, 218);}
+                #product li .color .color1{background-color:rgb(243, 220, 200);}
+                #product li .color .color2{background-color:rgb(245, 213, 186);}
+                #product li .color .color3{background-color:rgb(240, 209, 170);}
+                #product li .color .color4{background-color:rgb(226, 200, 150);}
+                
+
+                #product li .price{font-size:16px; line-height:30px; }
+                #product li .price .line{text-decoration:line-through; color:#ccc;}
+                #product li .price .sale{color:#f00;}
+                #product li .price strong{font-size:20px;}
+
+                #product li .basket{position:static; margin:0 auto 20px;}
+               
+
+                #product .first{width:200px; background-color:#f7f5f5;  text-align:center; margin-right:0; margin-bottom:20px;}
+                #product .first .img{width:180px; margin:0 auto;}
+                #product .first .desc{padding-top:0; padding-bottom:0;}
+                #product .first .name{font-size:18px; padding:0 20px;}
+                #product .first .basket{position:static; margin:0 auto 20px;}
+
+                
+        
+
+            
+
+            /*############## footer / topMenu ##############*/
+                #footer .topMenu{width:300px; height:580px; margin:0; padding-left:20px;}
+                #footer .topMenu ul li{margin-right:0;}
+                
+                #footer .topMenu .left{width:300px;}
+                #footer .topMenu .left li{width:250px;}
+
+                #footer .topMenu .right{width:300px;}
+                #footer .topMenu .right li{padding-top:50px;}
+
+                #footer .topMenu .right .customer{padding-top:20px; padding-bottom:30px;}
+                
+                #footer .topMenu .right .title{font-size:15px;}
+                #footer .topMenu .right .title a span{padding-bottom:10px;}
+                #footer .topMenu .right .title a strong{font-size:18px;}
+                #footer .topMenu .right .text{padding-top:10px; font-size:12px; line-height:17px;}
+                
+
+            /*############## footer / infoMenu ##############*/
+                #footer .infoMenu{width:300px; margin:0; padding-left:20px;}
+                #footer .infoMenu li a{font-size:12px; padding-right:13px;}
+
+            /*############## footer / address ##############*/
+                #footer address{width:300px; font-size:11px; margin:0; padding-left:20px;}
+                #footer address p{display:block; line-height:18px; padding-right:0;}
+
+                #footer address .desc{color:#777}
+                
+            /*############## footer / copyright ##############*/
+                #copyright p{width:300px; margin:0; padding-left:20px;}
+        
+        }
+
+
+
+        /*############## 스마트폰 세로버전 #############*/
+		@media all and (min-width:320px) and (max-width:480px){
+            
+            /*############## header ##############*/
+                #header{width:100%;}
+                h1{width:80px; left:15px; top:15px;}
+                h1 a img{width:100%;}
+
+                .nav_m_btn{display:block;}
+
+                #nav{display:none;}
+
+                #top_menu{width:30%; right:10px; top:18px;}
+                #top_menu p{font-size:12px;}
+
+            /*############### main #############*/
+                #main{width:100%; overflow:static; height:600px;}
+
+                #main .main_bg{display:none;}
+                #main .main_bg_m{display:block;}
+
+
+                #main .title{width:200px; color:#fff; left:50%; top:100px; transform:translatex(-100px);}
+                #main .title h2{font-size:60px; text-align:center;}
+                #main .title .select{width:200px; height:40px; border:1px solid #fff; margin:0 auto;}
+                #main .title select{display:block; width:180px; padding-right:10px; height:100%; text-indent:10px; line-height:40px; background-color:rgba(0,0,0,0); color:#fff; text-transform:uppercase; font-size:14px; border:none;}
+
+
+                #main .product_best{width:300px; height:600px; overflow:hidden; left:50%; top:230px; transform:translatex(-150px);}
+                #main .product_best ul{width:300px; text-align:center; color:#fff; margin:0 auto;}
+                #main .product_best li{width:100%; float:none;}
+                #main .product_best li .img{width:180px; margin:0 auto;}
+
+                #main .product_best li .desc{width:100%; height:130px;}
+                #main .product_best li .name{font-size:17px; font-weight:500;}
+                #main .product_best li .tag{font-size:13px; line-height:30px;}
+                #main .product_best li .price{font-size:13px; line-height:30px;}
+                #main .product_best li .price .line{text-decoration:line-through; color:#ccc;}
+                #main .product_best li .price .sale{color:#f00;}
+                #main .product_best li .price strong{font-size:15px;}
+
+                #main .product_best .btn{width:100px; height:20px; margin:0 auto;}
+                #main .product_best .btn li{width:16px; height:100%; float:left;}
+                #main .product_best .btn li a{display:block; width:16px; padding:0 10px;}
+                #main .product_best .btn li img{width:100%;}
+
+                #main div:after{content:""; display:block; clear:both;}
+
+            /*############## product #############*/
+                #product{width:100%; padding-top:50px; background-color:#f7f5f5;}
+                #product_inn{width:320px;  margin:0; overflow:hidden;}
+                #product ul{width:320px; overflow:hidden; padding-top:10px; padding-left:10px; color:#333;}
+                #product li{width:300px; position:relative; margin-right:0; margin-bottom:20px; float:none; background-color:#f7f5f5; text-align:center;}
+                #product li .img{width:200px; margin:0 auto; padding:25px; }
+                #product li .img a{display:block; width:100%;}
+                #product li .img a img{width:100%;}
+
+                
+
+                #product li .desc{width:100%; height:180px; padding-top:30px;}
+                #product li .name{font-size:16px;}
+                #product li .tag{font-size:15px; line-height:40px; color:#777;}
+
+                #product li .color{width:100%; height:50px;}
+                #product li .color span{display:inline-block; width:26px; height:26px; border-radius:13px; margin-right:10px; background-color:rgb(255, 235, 218);}
+                #product li .color .color1{background-color:rgb(243, 220, 200);}
+                #product li .color .color2{background-color:rgb(245, 213, 186);}
+                #product li .color .color3{background-color:rgb(240, 209, 170);}
+                #product li .color .color4{background-color:rgb(226, 200, 150);}
+                
+
+                #product li .price{font-size:16px; line-height:30px; }
+                #product li .price .line{text-decoration:line-through; color:#ccc;}
+                #product li .price .sale{color:#f00;}
+                #product li .price strong{font-size:20px;}
+
+                #product li .basket{position:static; margin:0 auto 20px;}
+               
+
+                #product .first{width:300px; background-color:#f7f5f5;  text-align:center; margin-right:0; margin-bottom:20px;}
+                #product .first .img{width:200px; margin:0 auto;}
+                #product .first .desc{padding-top:0; padding-bottom:0;}
+                #product .first .name{font-size:18px; padding:0 20px;}
+                #product .first .basket{position:static; margin:0 auto 20px;}
+
+                
+        
+
+            
+
+            /*############## footer / topMenu ##############*/
+                #footer .topMenu{width:300px; height:580px; margin:0; padding-left:20px;}
+                #footer .topMenu ul li{margin-right:0;}
+                
+                #footer .topMenu .left{width:300px;}
+                #footer .topMenu .left li{width:250px;}
+
+                #footer .topMenu .right{width:300px;}
+                #footer .topMenu .right li{padding-top:50px;}
+
+                #footer .topMenu .right .customer{padding-top:20px; padding-bottom:30px;}
+                
+                #footer .topMenu .right .title{font-size:15px;}
+                #footer .topMenu .right .title a span{padding-bottom:10px;}
+                #footer .topMenu .right .title a strong{font-size:18px;}
+                #footer .topMenu .right .text{padding-top:10px; font-size:12px; line-height:17px;}
+                
+
+            /*############## footer / infoMenu ##############*/
+                #footer .infoMenu{width:300px; margin:0; padding-left:20px;}
+                #footer .infoMenu li a{font-size:12px; padding-right:13px;}
+
+            /*############## footer / address ##############*/
+                #footer address{width:300px; font-size:11px; margin:0; padding-left:20px;}
+                #footer address p{display:block; line-height:18px; padding-right:0;}
+
+                #footer address .desc{color:#777}
+                
+            /*############## footer / copyright ##############*/
+                #copyright p{width:300px; margin:0; padding-left:20px;}
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+
+            /*######## header ########*/
+            $("#nav_m").hide();
+
+            $(".nav_m_btn").click(function(){
+                $("#nav_m").stop().slideDown();
+            });
+
+            $("#nav_m").mouseover(function(){
+                $(this).stop().show();
+            }).mouseout(function(){
+                $(this).stop().slideUp();
+            });
+
+
+            $("#nav_tit li:eq(0) a").bind("focusin mouseover",function(){
+                $("#nav ol").css({"transform":"rotatex(-90deg)"});
+                $(this).parent().parent().css({"transform":"rotatex(-90deg)"});
+                $("#nav_inn_shop").css({"transform":"rotatex(0deg)"});
+            });
+            $("#nav_tit li:eq(1) a").bind("focusin mouseover",function(){
+                $("#nav ol").css({"transform":"rotatex(-90deg)"});
+                $(this).parent().parent().css({"transform":"rotatex(-90deg)"});
+                $("#nav_inn_artist").css({"transform":"rotatex(0deg)"});
+            });
+            $("#nav_tit li:eq(2) a").bind("focusin mouseover",function(){
+                $("#nav ol").css({"transform":"rotatex(-90deg)"});
+                $(this).parent().parent().css({"transform":"rotatex(-90deg)"});
+                $("#nav_inn_play").css({"transform":"rotatex(0deg)"});
+            });
+            $("#nav_tit li:eq(3) a").bind("focusin mouseover",function(){
+                $("#nav ol").css({"transform":"rotatex(-90deg)"});
+                $(this).parent().parent().css({"transform":"rotatex(-90deg)"});
+                $("#nav_inn_community").css({"transform":"rotatex(0deg)"});
+            });
+
+            $("nav").bind("blur mouseleave",function(){
+                $("nav ol").css({"transform":"rotatex(-90deg)"});
+                $("#nav_tit").css({"transform":"rotatex(0deg)"});
+            });
+
+        });
+    </script>
+ </head>
+ <body>
+  <div id="wrap">
+      <header id="header">
+        <h1>
+            <a href="index.html" title="espoir">
+                <img src="img/logo_b.png" alt="에스쁘아"/>
+            </a>
+        </h1>
+        <p class="nav_m_btn">MENU &gt;</p>
+        <nav>
+            <div id="nav">
+              <ul id="nav_tit">
+                  <li><a href="#" title="SHOP">SHOP</a></li>
+                  <li><a href="#" title="ARTIST SERVICE">ARTIST SERVICE</a></li>
+                  <li><a href="#" title="nPLAY">&amp; PLAY</a></li>
+                  <li><a href="#" title="COMMUNITY">COMMUNITY</a></li>
+              </ul>
+              <ol id="nav_inn_shop">
+                  <li><a href="sub_best.html" title="best">best</a></li>
+                  <li><a href="sub_lip.html" title="lip">lip</a></li>
+                  <li><a href="sub_eye.html" title="eye">eye</a></li>
+                  <li><a href="sub_face.html" title="face">face</a></li>
+                  <li><a href="sub_sun.html" title="sun">sun</a></li>
+                  <li><a href="#" title="lookbook">lookbook</a></li>
+              </ol>
+          
+              <ol id="nav_inn_artist">
+                  <li><a href="#" title="ONLINE CONSULTING">ONLINE CONSULTING</a></li>
+                  <li><a href="#" title="OFFLINE CONSULTING">OFFLINE CONSULTING</a></li>
+              </ol>
+          
+              <ol id="nav_inn_play">
+                  <li><a href="sub_mix.html" title="powdernplay">powder &amp; play</a></li>
+                  <li><a href="sub_mix.html" title="glitternplay">gitter &amp; play</a></li>
+              </ol>
+          
+              <ol id="nav_inn_community">
+                  <li><a href="#" title="notice">notice</a></li>
+                  <li><a href="sub_QnA.html" title="QnA">Q&amp;A</a></li>
+                  <li><a href="#" title="event">event</a></li>
+                  <li><a href="#" title="review">review</a></li>
+                  <li><a href="#" title="store">store</a></li>
+              </ol>
+                  
+            </div>
+            <div id="nav_m">
+              <ul>
+                  <li class="tit"><a href="#" title="SHOP">SHOP</a></li>
+                  <li><a href="sub_best.html" title="best">best</a></li>
+                  <li><a href="sub_lip.html" title="lip">lip</a></li>
+                  <li><a href="sub_eye.html" title="eye">eye</a></li>
+                  <li><a href="sub_face.html" title="face">face</a></li>
+                  <li><a href="sub_sun.html" title="sun">sun</a></li>
+                  <li class="tit"><a href="#" title="ARTIST SERVICE">ARTIST SERVICE</a></li>
+                  <li><a href="#" title="ONLINE CONSULTING">ONLINE CONSULTING</a></li>
+                  <li><a href="#" title="OFFLINE CONSULTING">OFFLINE CONSULTING</a></li>
+                  <li class="tit"><a href="#" title="nPLAY">&amp; PLAY</a></li>
+                  <li><a href="sub_mix.html" title="powdernplay">powder &amp; play</a></li>
+                  <li><a href="sub_mix.html" title="glitternplay">gitter &amp; play</a></li>
+                  <li class="tit"><a href="#" title="COMMUNITY">COMMUNITY</a></li>
+                  <li><a href="#" title="notice">notice</a></li>
+                  <li><a href="sub_QnA.html" title="QnA">Q&amp;A</a></li>
+                  <li><a href="#" title="event">event</a></li>
+                  <li><a href="#" title="review">review</a></li>
+                  <li><a href="#" title="store">store</a></li>
+              </ul>
+            </div>
+            <div id="top_menu">
+                <p><a href="#" title="로그인">로그인</a></p>
+                <p><a href="#" title="회원가입">회원가입</a></p>
+            </div>
+        </nav>
+      </header>
+      <div id="container">
+          <section id="main">
+              <h3>best</h3>
+              <div class="bg">
+                  <p class="main_bg">
+                      <img src="img/bg_best.jpg" alt="best 배경"/>
+                  </p>
+                  <p class="main_bg_m">
+                      <img src="img/bg_best_m.jpg" alt="best 모바일 배경"/>
+                  </p>
+              </div>
+              <div class="title">
+                  <h2>BEST</h2>
+                  <div class="select">
+                    <select>
+                        <option value="face">face</option>
+                        <option value="lip">lip</option>
+                        <option value="eye">eye</option>
+                        <option value="sun">sun</option>
+                        <option value="other">other</option>
+                        <option value="new">new</option>
+                        <option value="best" selected="selected">best</option>
+                    </select>
+                  </div>
+              </div>
+              <div class="product_best">
+                  <ul>
+                    <li>
+                        <p class="img">
+                            <a href="sub_stick.html" title="best01">
+                                <img src="img/best01.png" alt="best01"/>
+                            </a>
+                        </p>
+                        <div class="desc">
+                          <p class="name">프로 테일러 비 글로우 스틱 파운데이션 SPF42 PA+++</p>
+                          <p class="tag">#광채커버스틱 #촘촘밀착</p>
+                          <p class="price">
+                              <span class="line">￦ 28,000</span><span class="sale">(25%)</span><strong>￦ 21,600</strong>
+                          </p>
+                        </div>
+                        <ul class="btn">
+                            <li>
+                                <a href="#" title="heart">
+                                    <img src="img/ico_heart.png" alt="heart"/>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" title="basket">
+                                    <img src="img/ico_basket.png" alt="basket"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p class="img">
+                            <a href="#" title="best02">
+                                <img src="img/best02.png" alt="best02"/>
+                            </a>
+                        </p>
+                        <div class="desc">
+                          <p class="name">꾸뛰르 립 틴트 벨벳</p>
+                          <p class="tag">#고퀄벨벳 #원조MLBB</p>
+                          <p class="price">
+                              <span class="line">￦ 20,000</span><span class="sale">(20%)</span><strong>￦ 16,600</strong>
+                          </p>
+                        </div>
+                        <ul class="btn">
+                            <li>
+                                <a href="#" title="heart">
+                                    <img src="img/ico_heart.png" alt="heart"/>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" title="basket">
+                                    <img src="img/ico_basket.png" alt="basket"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p class="img">
+                            <a href="#" title="best03">
+                                <img src="img/best03.png" alt="best03"/>
+                            </a>
+                        </p>
+                        <div class="desc">
+                          <p class="name">꾸뛰르 립틴트 샤인</p>
+                          <p class="tag">#고급광틴트 #촉맑탱</p>
+                          <p class="price">
+                              <span class="line">￦ 20,000</span><span class="sale">(20%)</span><strong>￦ 16,000</strong>
+                          </p>
+                        </div>
+                        <ul class="btn">
+                            <li>
+                                <a href="#" title="heart">
+                                    <img src="img/ico_heart.png" alt="heart"/>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" title="basket">
+                                    <img src="img/ico_basket.png" alt="basket"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                  </ul>
+              </div>
+          </section>
+          <section id="product">
+			<div id="product_inn">
+				  <h3>product</h3>
+				  <ul>
+					  <li class="first">
+						<p class="img">
+							<a href="#" title="best1">
+								<img src="img/best1.png" alt="best1"/>
+							</a>
+						</p>
+						<div class="desc">
+							<p class="name">프로 테일러 비 글로우 쿠션 올 뉴 SPF42 PA++(단품+리필)</p>
+							<p class="tag">#절대광채 #고급윤기</p>
+							<p class="color"><span class="color0"></span><span class="color1"></span><span class="color2"></span><span class="color3"></span><span class="color4"></span></p>
+							<p class="price">
+								<span class="line">￦ 35,000</span><span class="sale">(20%)</span><strong>￦ 28,000</strong>
+							</p>
+						</div>
+						<p class="basket">
+							<a href="#" title="basket">
+								<img src="img/ico_basket_bl.png" alt="basket"/>
+							</a>
+						</p>
+					  </li>
+					  <li class="first">
+						<p class="img">
+							<a href="#" title="best2">
+								<img src="img/best2.png" alt="best2"/>
+							</a>
+						</p>
+						<div class="desc">
+							<p class="name">프로 테일러 비 실크 쿠션 SPF42 PA++(단품+리필)</p>
+							<p class="tag">#실크페이스 #수부지인생쿠션</p>
+							<p class="color"><span class="color0"></span><span class="color1"></span><span class="color2"></span><span class="color3"></span></p>
+							<p class="price">
+								<span class="line">￦ 35,000</span><span class="sale">(30%)</span><strong>￦ 24,500</strong>
+							</p>
+						</div>
+						<p class="basket">
+							<a href="#" title="basket">
+								<img src="img/ico_basket_bl.png" alt="basket"/>
+							</a>
+						</p>
+					  </li>
+					  <li class="first">
+						<p class="img">
+							<a href="#" title="best3">
+								<img src="img/best3.png" alt="best3"/>
+							</a>
+						</p>
+						<div class="desc">
+							<p class="name">프로 테일러 비 벨벳 커버 쿠션 SPF34 PA++(단품+리필)</p>
+							<p class="tag">#반전커버 #레드쿠션</p>
+							<p class="color"><span class="color0"></span><span class="color1"></span><span class="color2"></span><span class="color3"></span><span class="color4"></span></p>
+							<p class="price">
+								<span class="line">￦ 38,000</span><span class="sale">(25%)</span><strong>￦ 28,500</strong>
+							</p>
+						</div>
+						<p class="basket">
+							<a href="#" title="basket">
+								<img src="img/ico_basket_bl.png" alt="basket"/>
+							</a>
+						</p>
+					  </li>
+					  <li>
+						<p class="img">
+							<a href="#" title="best4">
+								<img src="img/best4.png" alt="best4"/>
+							</a>
+						</p>
+						<div class="desc">
+							<p class="name">리얼 아이 팔레트</p>
+							<p class="tag">#풀메팔레트 #데일리팔레트</p>
+							<p class="color"><span class="color0"></span><span class="color1"></span><span class="color2"></span><span class="color3"></span><span class="color4"></span></p>
+							<p class="price">
+								<span class="line">￦ 32,000</span><span class="sale">(25%)</span><strong>￦ 24,000</strong>
+							</p>
+						</div>
+						<p class="basket">
+							<a href="#" title="basket">
+								<img src="img/ico_basket_bl.png" alt="basket"/>
+							</a>
+						</p>
+					  </li>
+					  <li>
+						<p class="img">
+							<a href="#" title="best5">
+								<img src="img/best5.png" alt="best5"/>
+							</a>
+						</p>
+						<div class="desc">
+							<p class="name">프로 테일러 파운데이션 비 벨벳 SPF22 PA++</p>
+							<p class="tag">#컴포트매트 #벨벳파데</p>
+							<p class="color"><span class="color0"></span><span class="color1"></span><span class="color2"></span><span class="color3"></span><span class="color4"></span></p>
+							<p class="price">
+								<span class="line">￦ 40,000</span><span class="sale">(25%)</span><strong>￦ 30,000</strong>
+							</p>
+						</div>
+						<p class="basket">
+							<a href="#" title="basket">
+								<img src="img/ico_basket_bl.png" alt="basket"/>
+							</a>
+						</p>
+					  </li>
+					  <li>
+						<p class="img">
+							<a href="#" title="best6">
+								<img src="img/best6.png" alt="best6"/>
+							</a>
+						</p>
+						<div class="desc">
+							<p class="name">워시드 핑크 캡슐 컬렉션</p>
+							<p class="tag">#물빠진핑크 #뉴트럴핑크</p>
+							<p class="color"><span class="color0"></span><span class="color1"></span><span class="color2"></span></p>
+							<p class="price">
+								<span class="line">￦ 22,000</span><span class="sale">(30%)</span><strong>￦ 15,400</strong>
+							</p>
+						</div>
+						<p class="basket">
+							<a href="#" title="basket">
+								<img src="img/ico_basket_bl.png" alt="basket"/>
+							</a>
+						</p>
+					  </li>
+					  <li>
+						<p class="img">
+							<a href="#" title="best7">
+								<img src="img/best7.png" alt="best7"/>
+							</a>
+						</p>
+						<div class="desc">
+							<p class="name">더브로우 밸런스 펜슬</p>
+							<p class="tag">#삼각형펜슬 #슬림삼각</p>
+							<p class="color"><span class="color0"></span><span class="color1"></span><span class="color2"></span><span class="color3"></span></p>
+							<p class="price">
+								<span class="line">￦ 16,000</span><span class="sale">(20%)</span><strong>￦ 12,800</strong>
+							</p>
+						</div>
+						<p class="basket">
+							<a href="#" title="basket">
+								<img src="img/ico_basket_bl.png" alt="basket"/>
+							</a>
+						</p>
+					  </li>
+					  <li>
+						<p class="img">
+							<a href="#" title="best8">
+								<img src="img/best8.png" alt="best8"/>
+							</a>
+						</p>
+						<div class="desc">
+							<p class="name">프로 테일러 비 벨벳 커버 쿠션 SPF34 PA++(단품+퍼프1매)</p>
+							<p class="tag">#반전커버 #레드쿠션</p>
+							<p class="color"><span class="color0"></span><span class="color1"></span><span class="color2"></span><span class="color3"></span><span class="color4"></span></p>
+							<p class="price">
+								<span class="line">￦ 28,000</span><span class="sale">(25%)</span><strong>￦ 21,000</strong>
+							</p>
+						</div>
+						<p class="basket">
+							<a href="#" title="basket">
+								<img src="img/ico_basket_bl.png" alt="basket"/>
+							</a>
+						</p>
+					  </li>
+                      <li>
+						<p class="img">
+							<a href="#" title="best9">
+								<img src="img/best9.png" alt="best9"/>
+							</a>
+						</p>
+						<div class="desc">
+							<p class="name">꾸뛰르 립틴트 샤인</p>
+							<p class="tag">#고급광틴트 #촉맑탱</p>
+							<p class="color"><span class="color0"></span><span class="color1"></span><span class="color2"></span><span class="color3"></span><span class="color4"></span></p>
+							<p class="price">
+								<span class="line">￦ 20,000</span><span class="sale">(20%)</span><strong>￦ 16,000</strong>
+							</p>
+						</div>
+						<p class="basket">
+							<a href="#" title="basket">
+								<img src="img/ico_basket_bl.png" alt="basket"/>
+							</a>
+						</p>
+					  </li>
+                      <li>
+						<p class="img">
+							<a href="#" title="best10">
+								<img src="img/best10.png" alt="best10"/>
+							</a>
+						</p>
+						<div class="desc">
+							<p class="name">프로 테일러 비 벨벳 커버 쿠션 리필 SPF34 PA++</p>
+							<p class="tag"></p>
+							<p class="color"><span class="color0"></span><span class="color1"></span><span class="color2"></span><span class="color3"></span><span class="color4"></span></p>
+							<p class="price">
+								<span class="line">￦ 17,000</span><span class="sale">(25%)</span><strong>￦ 12,750</strong>
+							</p>
+						</div>
+						<p class="basket">
+							<a href="#" title="basket">
+								<img src="img/ico_basket_bl.png" alt="basket"/>
+							</a>
+						</p>
+					  </li>
+                      <li>
+						<p class="img">
+							<a href="#" title="best11">
+								<img src="img/best11.png" alt="best11"/>
+							</a>
+						</p>
+						<div class="desc">
+							<p class="name">스킨 스무딩 글로우라이저</p>
+							<p class="tag">#매끈결 #수부지</p>
+							<p class="color"></p>
+							<p class="price">
+								<span class="line">￦ 30,000</span><span class="sale">(25%)</span><strong>￦ 22,500</strong>
+							</p>
+						</div>
+						<p class="basket">
+							<a href="#" title="basket">
+								<img src="img/ico_basket_bl.png" alt="basket"/>
+							</a>
+						</p>
+					  </li>
+                      <li>
+						<p class="img">
+							<a href="#" title="best12">
+								<img src="img/best12.png" alt="best12"/>
+							</a>
+						</p>
+						<div class="desc">
+							<p class="name">프로 테일러 파운데이션 비글로우 SPF25 PA++</p>
+							<p class="tag">#건성파데 #수부지파데</p>
+							<p class="color"><span class="color0"></span><span class="color1"></span><span class="color2"></span><span class="color3"></span><span class="color4"></span></p>
+							<p class="price">
+								<span class="line">￦ 38,000</span><span class="sale">(20%)</span><strong>￦ 30,400</strong>
+							</p>
+						</div>
+						<p class="basket">
+							<a href="#" title="basket">
+								<img src="img/ico_basket_bl.png" alt="basket"/>
+							</a>
+						</p>
+					  </li>
+                      <li>
+						<p class="img">
+							<a href="#" title="best13">
+								<img src="img/best13.png" alt="best13"/>
+							</a>
+						</p>
+						<div class="desc">
+							<p class="name">프레쉬 세팅 파우더 9g</p>
+							<p class="tag">#매끈보송 #기름종이파우더</p>
+							<p class="color"><span class="color0"></span></p>
+							<p class="price">
+								<span class="line">￦ 25,000</span><span class="sale">(30%)</span><strong>￦ 17,500</strong>
+							</p>
+						</div>
+						<p class="basket">
+							<a href="#" title="basket">
+								<img src="img/ico_basket_bl.png" alt="basket"/>
+							</a>
+						</p>
+					  </li>
+                      <li>
+						<p class="img">
+							<a href="#" title="best14">
+								<img src="img/best14.png" alt="best14"/>
+							</a>
+						</p>
+						<div class="desc">
+							<p class="name">노웨어 캡슐 컬렉션 더티네온</p>
+							<p class="tag">#스트릿네온 #더티네온</p>
+							<p class="color"><span class="color0"></span><span class="color1"></span><span class="color2"></span></p>
+							<p class="price">
+								<span class="line">￦ 23,000</span><span class="sale"></span><strong></strong>
+							</p>
+						</div>
+						<p class="basket">
+							<a href="#" title="basket">
+								<img src="img/ico_basket_bl.png" alt="basket"/>
+							</a>
+						</p>
+					  </li>
+                      <li>
+						<p class="img">
+							<a href="#" title="best15">
+								<img src="img/best15.png" alt="best15"/>
+							</a>
+						</p>
+						<div class="desc">
+							<p class="name">피치 스킨 피팅 베이스 SPF41 PA++++</p>
+							<p class="tag">#말랑복숭아 #밀착지속</p>
+							<p class="color"><span class="color0"></span></p>
+							<p class="price">
+								<span class="line">￦ 28,000</span><span class="sale">(20%)</span><strong>￦ 22,400</strong>
+							</p>
+						</div>
+						<p class="basket">
+							<a href="#" title="basket">
+								<img src="img/ico_basket_bl.png" alt="basket"/>
+							</a>
+						</p>
+					  </li>
+                      <li>
+						<p class="img">
+							<a href="#" title="best16">
+								<img src="img/best16.png" alt="best16"/>
+							</a>
+						</p>
+						<div class="desc">
+							<p class="name">꾸뛰르 립 틴트 워터벨벳</p>
+							<p class="tag">#비건픽싱 #청량컬러</p>
+							<p class="color"><span class="color0"></span><span class="color1"></span><span class="color2"></span><span class="color3"></span><span class="color4"></span></p>
+							<p class="price">
+								<span class="line">￦ 20,000</span><span class="sale">(20%)</span><strong>￦ 16,000</strong>
+							</p>
+						</div>
+						<p class="basket">
+							<a href="#" title="basket">
+								<img src="img/ico_basket_bl.png" alt="basket"/>
+							</a>
+						</p>
+					  </li>
+                      <li>
+						<p class="img">
+							<a href="#" title="best17">
+								<img src="img/best17.png" alt="best17"/>
+							</a>
+						</p>
+						<div class="desc">
+							<p class="name">소프트 터치 에어 퍼프</p>
+							<p class="tag">#말랑속살</p>
+							<p class="color"></p>
+							<p class="price">
+								<span class="line">￦ 2,000</span><span class="sale">(15%)</span><strong>￦ 1,700</strong>
+							</p>
+						</div>
+						<p class="basket">
+							<a href="#" title="basket">
+								<img src="img/ico_basket_bl.png" alt="basket"/>
+							</a>
+						</p>
+					  </li>
+                      <li>
+						<p class="img">
+							<a href="#" title="best18">
+								<img src="img/best18.png" alt="best18"/>
+							</a>
+						</p>
+						<div class="desc">
+							<p class="name">프로 테일러 파운데이션 비 실크 SPF34 PA++</p>
+							<p class="tag">#실크페이스 #24시간지속</p>
+							<p class="color"><span class="color0"></span><span class="color1"></span><span class="color2"></span><span class="color3"></span><span class="color4"></span></p>
+							<p class="price">
+								<span class="line">￦ 38,000</span><span class="sale">(20%)</span><strong>￦ 30,400</strong>
+							</p>
+						</div>
+						<p class="basket">
+							<a href="#" title="basket">
+								<img src="img/ico_basket_bl.png" alt="basket"/>
+							</a>
+						</p>
+					  </li>
+                      <li>
+						<p class="img">
+							<a href="#" title="best19">
+								<img src="img/best19.png" alt="best19"/>
+							</a>
+						</p>
+						<div class="desc">
+							<p class="name">올 메이크업 딥 클렌징 오일</p>
+							<p class="tag">#풀메순삭클오 #8無착한성분</p>
+							<p class="color"></p>
+							<p class="price">
+								<span class="line">￦ 22,000</span><span class="sale">(20%)</span><strong>￦ 17,600</strong>
+							</p>
+						</div>
+						<p class="basket">
+							<a href="#" title="basket">
+								<img src="img/ico_basket_bl.png" alt="basket"/>
+							</a>
+						</p>
+					  </li>
+				  </ul>
+			</div>
+          </section>
+      </div>
+      <footer id="footer">
+          <div class="topMenu">
+              <ul class="left">
+                  <li><a href="#" title="비회원주문조회">비회원주문조회</a></li>
+                  <li><a href="#" title="매장찾기">매장 찾기</a></li>
+                  <li><a href="#" title="브랜드소개">브랜드 소개</a></li>
+                  <li><a href="#" title="멤버쉽">멤버쉽</a></li>
+                  <li><a href="#" title="사이트맵">사이트맵</a></li>
+              </ul>
+              <ul class="right">
+                <li>
+                    <p class="title">
+                        <a href="#" title="makeup">
+                            <span>MAKEUP</span>
+                            <strong>BEAUTY COUNSELING</strong>
+                        </a>
+                    </p>
+                    <p class="text">
+                        언제 어디서든 언택트!<br/>
+                        아티스트와 상담하세요!
+                    </p>
+                </li>
+                <li>
+                    <p class="title">
+                        <a href="#" title="makeup">
+                            <span>고객센터</span>
+                            <strong>080 619 8888</strong>
+                        </a>
+                    </p>
+                    <p class="text">
+                        상담시간 13:00 ~ 17:00<br/>
+                        (월~금, 공휴일 제외)
+                    </p>
+                </li>
+              </ul>
+              <ul class="contact">
+                <li>
+                    <a href="#" title="insta">
+                        <img src="img/ico_insta.png" alt="instagram"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="facebook">
+                        <img src="img/ico_facebook.png" alt="facebook"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="twitter">
+                        <img src="img/ico_twitter.png" alt="twitter"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="kako">
+                        <img src="img/ico_kakao.png" alt="kakao"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="blog">
+                        <img src="img/ico_blog.png" alt="blog"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="mail">
+                        <img src="img/ico_mail.png" alt="mail"/>
+                    </a>
+                </li>
+              </ul>
+          </div>
+          <div class="infoMenu">
+              <ul>
+                  <li><a href="#" title="서비스 이용약관">서비스 이용약관</a></li>
+                  <li><a href="#" title="개인정보처리방침">개인정보처리방침</a></li>
+                  <li><a href="#" title="영상기기관리방침">영상기기관리방침</a></li>
+                  <li><a href="#" title="사업자 정보 확인">사업자 정보 확인</a></li>
+                  <li><a href="#" title="이메일 무단수집 거부">이메일 무단수집 거부</a></li>
+                  <li><a href="#" title="전자공고">전자공고</a></li>
+              </ul>
+          </div>
+          <address>
+              <p>(주)에스쁘아 대표이사: 최민정</p>
+              <p>본사 : 서울특별시 용산구 한강대로 100 (한강로2가) 6층</p>
+              <p>사업자번호: 104-86-58598</p>
+              <p>통신판매업신고번호 : 제 2017-서울용산-1293호</p>
+              <p><a href="#" title="사업자정보확인">사업자 정보 확인</a></p>
+              <p>개인정보보호책임자: 권세은</p>
+              <p>고객상담: <a href="#" title="number"></a>080-619-8888</p>
+              <p>이메일: espoirmall@espoir.com</p>
+              <p>호스팅제공자 : ㈜에스쁘아</p>
+              <p>고객님은 안전거래를 위해 현금 등으로 결제시 저희 쇼핑몰에서 가입한 이니시스 구매안전 서비스(에스크로)를 이용하실 수 있습니다.</p>
+              <p><a href="#" title="서비스가입사실확인">서비스 가입사실 확인</a></p>
+          </address>
+          <div id="copyright">
+              <p>Copyright ⓒ 2021 espoir. All Rights Reserved.</p>
+          </div>
+      </footer>
+  </div>
+ </body>
+</html>

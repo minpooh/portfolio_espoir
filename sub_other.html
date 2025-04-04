@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+	<title>espoir</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /*############### reset ###############*/
+            *{margin:0; padding:0;}
+            li{list-style-type:none;}
+            a:link, a:visited{text-decoration:none; color:#333;}
+            h3{width:1px; height:1px; position:absolute; left:-9999px; font-size:1px;}
+        
+        /*############### wrap ################*/
+            #wrap{min-width:1025px; width:100%;}
+
+        /*############## header ##############*/
+            #header{width:100%;}
+            h1{position:fixed; left:50px; top:50px; z-index:1;}
+
+        /*############# container ############*/
+            #container{width:100%;}
+        
+        /*############### main #############*/
+            #main{width:100%; overflow:hidden; background-image:url("img/bg_other.jpg"); background-size:120%; background-position:top left; background-repeat:no-repeat;}
+            #main div{float:left;}
+            #main .title{width:250px; padding-top:300px; padding-left:50px; color:#fff;}
+            #main .title h2{font-size:100px; font-family:'Oswald', sans-serif; font-weight:500;}
+            #main .title .select{width:220px; height:50px; border:1px solid #fff;}
+            #main .title select{display:block; width:200px; padding-right:20px; height:100%; text-indent:20px; line-height:50px; background-color:rgba(0,0,0,0); color:#fff; text-transform:uppercase; font-size:16px; border:none;}
+
+
+            #main .product_other{width:1030px; height:650px; padding-top:100px; padding-left:150px; overflow:hidden;}
+            #main .product_other ul{width:1500px; text-align:center; color:#fff;}
+            #main .product_other li{width:300px; float:left;}
+            #main .product_other li .img{width:100%;}
+            #main .product_other li .img a{display:block; width:100%;}
+            #main .product_other li .img a img{width:100%;}
+
+            #main .product_other li .desc{width:100%; height:130px;}
+            #main .product_other li .name{font-size:20px; font-weight:600;}
+            #main .product_other li .tag{font-size:14px; line-height:40px;}
+            #main .product_other li .price{font-size:16px; line-height:30px;}
+            #main .product_other li .price .line{text-decoration:line-through; color:#ccc;}
+            #main .product_other li .price .sale{color:#f00;}
+            #main .product_other li .price strong{font-size:20px;}
+
+            #main .product_other .btn{width:100px; height:34px; margin:0 auto;}
+            #main .product_other .btn li{width:34px; height:100%; float:left;}
+            #main .product_other .btn li a{display:block; width:34px; padding:0 10px;}
+            #main .product_other .btn li img{width:50%;}
+
+            #main div:after{content:""; display:block; clear:both;}
+
+        /*############## product #############*/
+            #product{width:1280px; padding-top:100px; margin:0 auto; overflow:hidden;}
+            #product ul{width:1500px; color:#333;}
+            #product li{width:300px; position:relative; margin-right:20px; margin-bottom:70px; float:left;}
+            #product li .img{width:250px; padding:25px; background-color:#f7f5f5;}
+            #product li .img a{display:block; width:100%;}
+            #product li .img a img{width:100%;}
+
+            #product li .desc{width:100%; height:180px; padding-top:30px;}
+            #product li .name{height:44px; font-size:18px;}
+            #product li .tag{font-size:15px; line-height:40px; color:#777;}
+
+            #product li .price{font-size:16px; padding-top:50px;}
+            #product li .price .line{text-decoration:line-through; color:#ccc;}
+            #product li .price .sale{color:#f00;}
+            #product li .price strong{font-size:20px;}
+
+            #product li .basket{position:absolute; right:10px; bottom:10px;}
+        
+        /*############## footer ##############*/
+            #footer{width:100%; background-color:#000;}
+
+        /*############## footer / topMenu ##############*/
+            #footer .topMenu{width:1280px; height:300px; padding-top:50px; margin:0 auto;}
+            #footer .topMenu ul{float:left;}
+            #footer .topMenu ul li{margin-right:50px;}
+            #footer .topMenu a{color:#fff;}
+            
+            #footer .topMenu .left{width:300px;}
+            #footer .topMenu .left li{width:250px; line-height:40px;}
+            #footer .topMenu .left li a{font-size:25px;}
+
+            #footer .topMenu .right{width:700px;}
+            #footer .topMenu .right li{width:300px; float:left;}
+            
+            #footer .topMenu .right .title{font-size:20px;}
+            #footer .topMenu .right .title a{display:block;}
+            #footer .topMenu .right .title a span{display:block; padding-bottom:30px;}
+            #footer .topMenu .right .title a strong{display:block; font-size:25px;}
+            #footer .topMenu .right .text{padding-top:30px; color:#aaa; font-size:14px; line-height:20px;}
+            
+
+            #footer .topMenu .contact{width:280px;}
+            #footer .topMenu .contact li{margin:8px; float:left;}
+            #footer .topMenu .contact li a{display:block; width:27px; height:27px;}
+            #footer .topMenu .contact li a img{width:100%;}
+
+        /*############## footer / infoMenu ##############*/
+            #footer .infoMenu{width:1280px; margin:0 auto 20px;}
+            #footer .infoMenu ul{width:100%;}
+            #footer .infoMenu li{display:inline;}
+            #footer .infoMenu li a{color:#fff; font-size:13px; padding-right:10px;}
+
+        /*############## footer / address ##############*/
+            #footer address{width:1280px; margin:0 auto; color:#aaa; font-style:normal; font-size:13px;}
+            #footer address p{display:inline; padding-right:10px;}
+            #footer address p a{color:#fff; text-decoration:underline;}
+
+        /*############## footer / copyright ##############*/
+            #copyright{width:100%;}
+            #copyright p{width:1280px; margin:0 auto; line-height:100px; font-size:13px; color:#aaa;}
+    </style>
+ </head>
+ <body>
+  <div id="wrap">
+      <header id="header">
+          <h1>
+              <a href="https://www.espoir.com/ko/main.do" title="espoir">
+                  <img src="img/logo_b.png" alt="에스쁘아"/>
+              </a>
+          </h1>
+      </header>
+      <div id="container">
+          <section id="main">
+              <h3>other_best</h3>
+              <div class="title">
+                  <h2>OTHER</h2>
+                  <div class="select">
+                    <select>
+                        <option value="face">face</option>
+                        <option value="lip">lip</option>
+                        <option value="eye">eye</option>
+                        <option value="sun">sun</option>
+                        <option value="other" selected="selected">other</option>
+                        <option value="new">new</option>
+                        <option value="best">best</option>
+                    </select>
+                  </div>
+              </div>
+              <div class="product_other">
+                  <ul>
+                    <li>
+                        <p class="img">
+                            <a href="#" title="other01">
+                                <img src="img/other01.png" alt="other01"/>
+                            </a>
+                        </p>
+                        <div class="desc">
+                          <p class="name">립 스머지 브러쉬</p>
+                          <p class="tag">#립스머징 #오버립</p>
+                          <p class="price">
+                              <span class="line">￦ 15,000</span><span class="sale">(15%)</span><strong>￦ 12,700</strong>
+                          </p>
+                        </div>
+                        <ul class="btn">
+                            <li>
+                                <a href="#" title="heart">
+                                    <img src="img/ico_heart.png" alt="heart"/>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" title="basket">
+                                    <img src="img/ico_basket.png" alt="basket"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p class="img">
+                            <a href="#" title="other02">
+                                <img src="img/other02.png" alt="other02"/>
+                            </a>
+                        </p>
+                        <div class="desc">
+                          <p class="name">소프트 터치 에어 퍼프 7개입</p>
+                          <p class="tag">#말랑속살</p>
+                          <p class="price">
+                              <span class="line">￦ 14,000</span><span class="sale">(15%)</span><strong>￦ 11,900</strong>
+                          </p>
+                        </div>
+                        <ul class="btn">
+                            <li>
+                                <a href="#" title="heart">
+                                    <img src="img/ico_heart.png" alt="heart"/>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" title="basket">
+                                    <img src="img/ico_basket.png" alt="basket"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p class="img">
+                            <a href="#" title="other03">
+                                <img src="img/other03.png" alt="other03"/>
+                            </a>
+                        </p>
+                        <div class="desc">
+                          <p class="name">케익 프레그런스</p>
+                          <p class="tag">#고체향수 #에스쁘아시그니처</p>
+                          <p class="price">
+                              <span class="line">￦ 12,000</span><span class="sale">(20%)</span><strong>￦ 9,600</strong>
+                          </p>
+                        </div>
+                        <ul class="btn">
+                            <li>
+                                <a href="#" title="heart">
+                                    <img src="img/ico_heart.png" alt="heart"/>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" title="basket">
+                                    <img src="img/ico_basket.png" alt="basket"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                  </ul>
+              </div>
+          </section>
+          <section id="product">
+              <h3>product</h3>
+              <ul>
+                  <li>
+                    <p class="img">
+                        <a href="#" title="other1">
+                            <img src="img/other1.png" alt="other1"/>
+                        </a>
+                    </p>
+                    <div class="desc">
+                        <p class="name">립 스머지 브러쉬</p>
+                        <p class="tag">#립스머징 #오버립</p>
+                        <p class="price">
+                            <span class="line">￦ 15,000</span><span class="sale">(15%)</span><strong>￦ 12,700</strong>
+                        </p>
+                    </div>
+                    <p class="basket">
+                        <a href="#" title="basket">
+                            <img src="img/ico_basket_bl.png" alt="basket"/>
+                        </a>
+                    </p>
+                  </li>
+                  <li>
+                    <p class="img">
+                        <a href="#" title="other2">
+                            <img src="img/other2.png" alt="other2"/>
+                        </a>
+                    </p>
+                    <div class="desc">
+                        <p class="name">소프트 터치 에어 퍼프 7개입</p>
+                        <p class="tag">#말랑속살</p>
+                        <p class="price">
+                            <span class="line">￦ 14,000</span><span class="sale">(15%)</span><strong>￦ 11,900</strong>
+                        </p>
+                    </div>
+                    <p class="basket">
+                        <a href="#" title="basket">
+                            <img src="img/ico_basket_bl.png" alt="basket"/>
+                        </a>
+                    </p>
+                  </li>
+                  <li>
+                    <p class="img">
+                        <a href="#" title="other3">
+                            <img src="img/other3.png" alt="other3"/>
+                        </a>
+                    </p>
+                    <div class="desc">
+                        <p class="name">케익 프레그런스</p>
+                        <p class="tag">#고체향수 #에스쁘아시그니처</p>
+                        <p class="price">
+                            <span class="line">￦ 12,000</span><span class="sale">(20%)</span><strong>￦ 9,600</strong>
+                        </p>
+                    </div>
+                    <p class="basket">
+                        <a href="#" title="basket">
+                            <img src="img/ico_basket_bl.png" alt="basket"/>
+                        </a>
+                    </p>
+                  </li>
+                  <li>
+                    <p class="img">
+                        <a href="#" title="other4">
+                            <img src="img/other4.png" alt="other4"/>
+                        </a>
+                    </p>
+                    <div class="desc">
+                        <p class="name">올 메이크업 딥 클렌징 오일</p>
+                        <p class="tag">#풀메순삭클오 #8無착한성분</p>
+                        <p class="price">
+                            <span class="line">￦ 22,000</span><span class="sale">(20%)</span><strong>￦ 17,600</strong>
+                        </p>
+                    </div>
+                    <p class="basket">
+                        <a href="#" title="basket">
+                            <img src="img/ico_basket_bl.png" alt="basket"/>
+                        </a>
+                    </p>
+                  </li>
+                  <li>
+                    <p class="img">
+                        <a href="#" title="other5">
+                            <img src="img/other5.png" alt="other5"/>
+                        </a>
+                    </p>
+                    <div class="desc">
+                        <p class="name">실키 슬라이딩 스폰지</p>
+                        <p class="tag">#실크결스폰지 #밀어바르는스폰지</p>
+                        <p class="price">
+                            <span class="line">￦ 8,000</span><span class="sale">(15%)</span><strong>￦ 6,800</strong>
+                        </p>
+                    </div>
+                    <p class="basket">
+                        <a href="#" title="basket">
+                            <img src="img/ico_basket_bl.png" alt="basket"/>
+                        </a>
+                    </p>
+                  </li>
+                  <li>
+                    <p class="img">
+                        <a href="#" title="other6">
+                            <img src="img/other6.png" alt="other6"/>
+                        </a>
+                    </p>
+                    <div class="desc">
+                        <p class="name">수퍼 소프트 페이스 브러쉬</p>
+                        <p class="tag">#댕댕이브러쉬 #금손브러쉬</p>
+                        <p class="price">
+                            <span class="line">￦ 25,000</span><span class="sale">(20%)</span><strong>￦ 20,000</strong>
+                        </p>
+                    </div>
+                    <p class="basket">
+                        <a href="#" title="basket">
+                            <img src="img/ico_basket_bl.png" alt="basket"/>
+                        </a>
+                    </p>
+                  </li>
+                  <li>
+                    <p class="img">
+                        <a href="#" title="otehr7">
+                            <img src="img/other7.png" alt="other7"/>
+                        </a>
+                    </p>
+                    <div class="desc">
+                        <p class="name">미니 브러쉬 키트</p>
+                        <p class="tag">#갓성비브러쉬키트 #메컵은브러쉬빨</p>
+                        <p class="price">
+                            <span class="line">￦ 45,000</span><span class="sale">(20%)</span><strong>￦ 36,000</strong>
+                        </p>
+                    </div>
+                    <p class="basket">
+                        <a href="#" title="basket">
+                            <img src="img/ico_basket_bl.png" alt="basket"/>
+                        </a>
+                    </p>
+                  </li>
+                  <li>
+                    <p class="img">
+                        <a href="#" title="other8">
+                            <img src="img/other8.png" alt="other8"/>
+                        </a>
+                    </p>
+                    <div class="desc">
+                        <p class="name">소프트 터치 에어 퍼프</p>
+                        <p class="tag">#말랑속살</p>
+                        <p class="price">
+                            <span class="line">￦ 2,000</span><span class="sale">(15%)</span><strong>￦ 1,700</strong>
+                        </p>
+                    </div>
+                    <p class="basket">
+                        <a href="#" title="basket">
+                            <img src="img/ico_basket_bl.png" alt="basket"/>
+                        </a>
+                    </p>
+                  </li>
+                  <li>
+                    <p class="img">
+                        <a href="#" title="other9">
+                            <img src="img/other9.png" alt="other9"/>
+                        </a>
+                    </p>
+                    <div class="desc">
+                        <p class="name">메가 픽스 블렌더</p>
+                        <p class="tag">#메가사이즈 #듀얼사이드</p>
+                        <p class="price">
+                            <span class="line">￦ 12,000</span><span class="sale">(15%)</span><strong>￦ 10,200</strong>
+                        </p>
+                    </div>
+                    <p class="basket">
+                        <a href="#" title="basket">
+                            <img src="img/ico_basket_bl.png" alt="basket"/>
+                        </a>
+                    </p>
+                  </li>
+                  <li>
+                    <p class="img">
+                        <a href="#" title="other10">
+                            <img src="img/other10.png" alt="other10"/>
+                        </a>
+                    </p>
+                    <div class="desc">
+                        <p class="name">히팅 아이래쉬 컬러 듀얼 콤</p>
+                        <p class="tag">#파워컬링 #NO뭉침</p>
+                        <p class="price">
+                            <span class="line">￦ 35,000</span><span class="sale">(40%)</span><strong>￦ 21,000</strong>
+                        </p>
+                    </div>
+                    <p class="basket">
+                        <a href="#" title="basket">
+                            <img src="img/ico_basket_bl.png" alt="basket"/>
+                        </a>
+                    </p>
+                  </li>
+                  <li>
+                    <p class="img">
+                        <a href="#" title="other11">
+                            <img src="img/other11.png" alt="other11"/>
+                        </a>
+                    </p>
+                    <div class="desc">
+                        <p class="name">수퍼 데피니션 페이스 브러쉬</p>
+                        <p class="tag">#촘촘커버 #칫솔브러쉬</p>
+                        <p class="price">
+                            <span class="line">￦ 20,000</span><span class="sale">(40%)</span><strong>￦ 12,000</strong>
+                        </p>
+                    </div>
+                    <p class="basket">
+                        <a href="#" title="basket">
+                            <img src="img/ico_basket_bl.png" alt="basket"/>
+                        </a>
+                    </p>
+                  </li>
+                  <li>
+                    <p class="img">
+                        <a href="#" title="other12">
+                            <img src="img/other12.png" alt="other12s"/>
+                        </a>
+                    </p>
+                    <div class="desc">
+                        <p class="name">스키니 픽스 블렌더</p>
+                        <p class="tag">#물광퍼프 #얇은밀착</p>
+                        <p class="price">
+                            <span class="line">￦ 10,000</span><span class="sale">(15%)</span><strong>￦ 8,500</strong>
+                        </p>
+                    </div>
+                    <p class="basket">
+                        <a href="#" title="basket">
+                            <img src="img/ico_basket_bl.png" alt="basket"/>
+                        </a>
+                    </p>
+                  </li>
+              </ul>
+          </section>
+      </div>
+      <footer id="footer">
+          <div class="topMenu">
+              <ul class="left">
+                  <li><a href="#" title="비회원주문조회">비회원주문조회</a></li>
+                  <li><a href="#" title="매장찾기">매장 찾기</a></li>
+                  <li><a href="#" title="브랜드소개">브랜드 소개</a></li>
+                  <li><a href="#" title="멤버쉽">멤버쉽</a></li>
+                  <li><a href="#" title="사이트맵">사이트맵</a></li>
+              </ul>
+              <ul class="right">
+                <li>
+                    <p class="title">
+                        <a href="#" title="makeup">
+                            <span>MAKEUP</span>
+                            <strong>BEAUTY COUNSELING</strong>
+                        </a>
+                    </p>
+                    <p class="text">
+                        언제 어디서든 언택트!<br/>
+                        아티스트와 상담하세요!
+                    </p>
+                </li>
+                <li>
+                    <p class="title">
+                        <a href="#" title="makeup">
+                            <span>고객센터</span>
+                            <strong>080 619 8888</strong>
+                        </a>
+                    </p>
+                    <p class="text">
+                        상담시간 13:00 ~ 17:00<br/>
+                        (월~금, 공휴일 제외)
+                    </p>
+                </li>
+              </ul>
+              <ul class="contact">
+                <li>
+                    <a href="#" title="insta">
+                        <img src="img/ico_insta.png" alt="instagram"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="facebook">
+                        <img src="img/ico_facebook.png" alt="facebook"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="twitter">
+                        <img src="img/ico_twitter.png" alt="twitter"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="kako">
+                        <img src="img/ico_kakao.png" alt="kakao"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="blog">
+                        <img src="img/ico_blog.png" alt="blog"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="mail">
+                        <img src="img/ico_mail.png" alt="mail"/>
+                    </a>
+                </li>
+              </ul>
+          </div>
+          <div class="infoMenu">
+              <ul>
+                  <li><a href="#" title="서비스 이용약관">서비스 이용약관</a></li>
+                  <li><a href="#" title="개인정보처리방침">개인정보처리방침</a></li>
+                  <li><a href="#" title="영상기기관리방침">영상기기관리방침</a></li>
+                  <li><a href="#" title="사업자 정보 확인">사업자 정보 확인</a></li>
+                  <li><a href="#" title="이메일 무단수집 거부">이메일 무단수집 거부</a></li>
+                  <li><a href="#" title="전자공고">전자공고</a></li>
+              </ul>
+          </div>
+          <address>
+              <p>(주)에스쁘아 대표이사: 최민정</p>
+              <p>본사 : 서울특별시 용산구 한강대로 100 (한강로2가) 6층</p>
+              <p>사업자번호: 104-86-58598</p>
+              <p>통신판매업신고번호 : 제 2017-서울용산-1293호</p>
+              <p><a href="#" title="사업자정보확인">사업자 정보 확인</a></p>
+              <p>개인정보보호책임자: 권세은</p>
+              <p>고객상담: <a href="#" title="number"></a>080-619-8888</p>
+              <p>이메일: espoirmall@espoir.com</p>
+              <p>호스팅제공자 : ㈜에스쁘아</p>
+              <p>고객님은 안전거래를 위해 현금 등으로 결제시 저희 쇼핑몰에서 가입한 이니시스 구매안전 서비스(에스크로)를 이용하실 수 있습니다.</p>
+              <p><a href="#" title="서비스가입사실확인">서비스 가입사실 확인</a></p>
+          </address>
+          <div id="copyright">
+              <p>Copyright ⓒ 2021 espoir. All Rights Reserved.</p>
+          </div>
+      </footer>
+  </div>
+ </body>
+</html>

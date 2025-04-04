@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+	<title>espoir</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /*############### reset ###############*/
+            *{margin:0; padding:0;}
+            body{font-family:gothic,sans-serif;}
+            header, footer, div, section, p, ul li{margin:0; padding:0;}
+            li{list-style-type:none;}
+            a:link, a:visited{text-decoration:none; color:#333;}
+            h3{width:1px; height:1px; position:absolute; left:-9999px; font-size:1px;}
+            img{border:none;}
+        
+        /*############### wrap ################*/
+            #wrap{width:100%;}
+
+        /*############## header ##############*/
+            #header{width:100%;}
+            h1{position:fixed; left:50px; top:50px; z-index:1;}
+
+            .nav_m_btn{display:none; position:fixed; left:15px; top:60px; z-index:1; font-family:'Oswald', sans-serif; font-weight:400;}
+
+        /*############## header / nav / nav(div) ##############*/
+            nav{width:100%;}
+
+            #nav{width:100%; height:100px; position:absolute; left:0; top:0; z-index:3;}
+            #nav_tit, #nav_inn_shop, #nav_inn_artist, #nav_inn_play, #nav_inn_community{width:60%; position:absolute; left:25%; top:50px; z-index:2;}
+            #nav_tit li{width:25%; text-align:center; float:left; transition:transform 0.5s linear 0.2s;}
+			
+			#nav_tit{transform:rotatex(0deg); transition:transform 0.3s linear;}
+			#nav_inn_shop, #nav_inn_artist, #nav_inn_play, #nav_inn_community{transform:rotatex(-90deg); transition:transform 0.3s linear;}
+
+            #nav ol li{text-align:center; float:left; height:30px;}
+            #nav_inn_shop li{width:16%;}
+            #nav_inn_community li{width:20%;}
+            #nav_inn_artist li, #nav_inn_play li{width:40%;}
+
+            #nav ul li a, #nav ol li a{padding:0 10px; color:#000; text-transform:uppercase;}
+            #nav ul li a:link, #nav ul li a:visited, #nav ol li a:link, #nav ol li a:visited{font-size:20px; font-family:'Oswald', sans-serif; font-weight:500; letter-spacing:1px;}
+            #nav ul li a:hover, #nav ul li a:focus, #nav ol li a:hover, #nav ol li a:focus{color:#fff;}
+        
+
+            #nav:after, #nav ul:after{content:""; display:block; clear:both;}
+
+            #top_menu{width:10%; position:fixed; right:30px; top:50px; z-index:3;}
+            #top_menu p{width:50%; float:left; font-size:15px; font-weight:500;}
+            #top_menu p a:hover, #top_menu a:focus{color:#fff;}
+            
+            #top_menu:after{content:""; display:block; clear:both;}
+            
+            
+        /*############## header / nav / nav_m(div) ##############*/
+            #nav_m{width:100%; position:fixed; left:0; top:0; z-index:2; transition:all 0.5s linear;}
+            #nav_m ul{width:100%; padding-top:20px; padding-bottom:20px; background-color:#Fff;}
+            #nav_m ul li{width:100%; text-indent:20px;}
+
+            #nav_m ul li a{text-transform:uppercase;}
+            #nav_m ul li a:link, a:visited{font-size:15px; font-family:'Oswald', sans-serif; letter-spacing:1px;}
+            #nav_m ul li a:hover, a:focus{background-color:#333; color:#fff;}
+
+            #nav_m ul .tit a:link, a:visited{font-size:20px; font-weight:500;}
+
+        /*############# container ############*/
+            #container{width:100%;}
+        
+        /*############### visual #############*/
+            #visual{width:100%; height:950px; overflow:hidden; background-color:#efefef; color:#fff; position:relative; margin:0 auto;}
+
+            
+        /*############### visual / screen #############*/
+            #visual #screen{width:1920px; overflow:hidden; position:absolute; left:0; top:0;}
+            
+            #visual .film{width:7680px;}
+            #visual .film .scene{width:1920px; float:left;}
+            #visual .film .scene img{width:100%;}
+            
+            #visual .screen .film:after{content:""; display:block; clear:both;}
+
+        /*############### visual / textBox #############*/
+            #visual #textBox{width:100%; position:absolute; left:10%; top:50%;}
+
+            #visual h2{width:1920px; font-size:60px; font-weight:500;}
+            #visual h2 span{font-size:27px; font-weight:400;}
+            #visual h2 a{color:#fff;}
+            #visual .text{font-size:20px; padding-top:20px;}
+
+            #visual .textBox .film:after{content:""; display:block; clear:both;}
+
+        /*############### visual / mobile_bg #############*/
+            #visual #mobile_bg{display:none; width:100%; overflow:hidden; margin:0 auto;}
+
+            #visual #mobile_bg .m_bg_film{width:100%;}
+
+            #visual #mobile_bg li{width:100%;}
+            #visual #mobile_bg li img{width:100%;}
+
+            
+
+        /*############### visual / btn #############*/
+
+            #visual .btn p{width:100px; height:100px; position:absolute; top:50%; transform:translatey(-50%); cursor:pointer;}
+            #visual .btn p img{width:100%; height:100%;}
+
+            #visual .btn .prevBtn{left:2%;}
+            #visual .btn .nextBtn{right:2%;}
+
+        
+
+            
+
+        /*################ main ##############*/
+            #main{width:100%; height:1025px; background-color:#ede0d6; position:relative; transition:height 0.3s linear;}
+
+            #main strong{font-size:100px; color:rgb(211, 16, 22); font-family: 'Oswald', sans-serif; position:absolute; z-index:1;
+			text-shadow:0 0 5px rgba(0,0,0,0.2);}
+            #main .top_text{left:60%;}
+            #main .bottom_text{left:10%; top:70%; transition:top 0.3s linear;}
+
+            #main .imgArea{width:1025px; padding-top:200px; margin:0 auto; position:relative;}
+            #main .imgArea p{width:50%; position:absolute; left:300px; top:100px; transition:left 0.3s linear, top 0.3s linear;}
+            #main .imgArea p img{width:100%;}
+
+            
+
+        /*################## lookBook ################*/
+            #lookBook{width:100%; overflow:hidden; background-color:#ede0d6;}
+
+            #lookBook .look_main_photo{width:546px; padding-top:100px; margin:0 auto;}
+            #lookBook .look_main_photo img{width:100%;}
+
+            #lookBook .title{font-size:100px; font-family: 'Oswald', sans-serif; text-shadow:2px 2px 7px rgba(0,0,0,0.2);}
+
+        /*################## lookBook / look0 ################*/
+            #lookBook .look0{width:100%;}
+            #lookBook .look0 .bg{background-color:#ede0d6; background-image:url("img/bevelvetlook_bg.jpeg"); background-size:110%; background-repeat:no-repeat;}
+
+            #lookBook .look0 .title{width:700px; color:rgb(211, 16, 22); margin:0 auto;}
+
+            #lookBook .look0 .look_sub{width:1250px; height:450px; margin:0 auto;}
+            
+            #lookBook .look_sub .sub_img0{width:450px; margin-right:30px;}
+            #lookBook .look_sub .sub_img1{width:770px;}
+            
+            
+
+        /*################## lookBook / look1 ################*/
+            #lookBook .look1{width:100%; padding-top:200px;}
+            #lookBook .look1 .title{width:900px; color:#f34b7f; padding-left:100px;}
+
+            #lookBook .look1 .look_img{width:100%; height:1500px; position:relative;}
+            #lookBook .look1 .look_img p{width:386px; position:absolute;}
+            #lookBook .look1 .look_img p img{width:100%;}
+            #lookBook .look1 .look_img .main_photo0{width:500px; left:200px; top:50px;}
+            #lookBook .look1 .look_img .main_photo1{left:1000px; top:-50px;}
+            #lookBook .look1 .look_img .main_photo2{width:400px; left:800px; top:600px;}
+
+        /*################## lookBook / look2 ################*/
+            #lookBook .look2{width:100%; padding-bottom:200px;}
+            #lookBook .look2 .bg{background-color:#ede0d6; background-image:url("img/peachlook_bg.jpeg"); background-size:110%; background-repeat:no-repeat;}
+
+            #lookBook .look2 .title{width:800px; color:#e7ada7; margin:0 auto;}
+
+            
+
+        /*################## lookBook / bottom_text ################*/
+            #lookBook .bottom_text{width:100%; height:300px; overflow:hidden; white-space:nowrap; text-indent:50px; font-size:180px; font-weight:900; font-family: 'Oswald', sans-serif; color:rgba(218,179,141,0.3); position:relative;}
+            #lookBook .bottom_text span{position:absolute; left:0; top:0; animation:ani1 30s infinite alternate;}
+
+            @keyframes ani1{
+                100%{left:100%;}
+                0%{left:0%}
+            }
+
+        /*################### livenmore ##################*/
+            #livenmore{width:100%;}
+            #livenmore .livenmore{width:1200px; height:600px; padding-top:100px; border-bottom:1px dashed #777; margin:0 auto; position:relative;}
+            
+            #livenmore .livenmore .desc{width:500px; padding-top:30px; float:left;}
+            #livenmore .livenmore .desc h4{width:100%; height:100px; font-size:70px; letter-spacing:-5px;}
+            #livenmore .livenmore .desc p{width:50%; font-size:15px; line-height:25px; color:#888;}
+        
+            #livenmore .livenmore .video{width:700px; height:400px; overflow:hidden; float:left;}
+            #livenmore .livenmore .video ul{width:2250px;}
+            #livenmore .livenmore .video li{width:700px; margin-right:50px; float:left;}
+            #livenmore .livenmore .video li a{width:100%; display:block;}
+
+            #livenmore .livenmore:after{content:""; display:block; clear:both;}
+
+            #livenmore .video_btn p{position:absolute; top:300px; cursor:pointer;}
+            #livenmore .video_btn .nextBtn{right:-50px;}
+            #livenmore .video_btn .prevBtn{left:450px;}
+
+
+
+        /*################### hot_tok_area ##################*/
+            #hot_tok_area{width:100%;}
+            #hot_tok_area h4{font-size:100px; text-align:center; line-height:150px; padding:30px 0;}
+            #hot_tok{width:1400px; height:700px; margin:0 auto; overflow:hidden;}
+            #hot_tok ul{width:1400px;}
+            #hot_tok li{width:325px; height:578px; float:left;}
+            #hot_tok li a{width:100%; display:block;}
+            #hot_tok li a img{width:100%;}
+
+            #hot_tok_area #view{width:325px; height:578px; position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); border:5px solid #fff; z-index:1;}
+            #hot_tok_area #view img{width:100%;}
+            #hot_tok_area #full{width:100%; height:100%; background-color:rgba(0,0,0,0.5); position:fixed; left:0; top:0;}
+
+          
+
+        
+        /*############## footer ##############*/
+            #footer{width:100%; background-color:#000;}
+
+        /*############## footer / topMenu ##############*/
+            #footer .topMenu{width:1280px; height:300px; padding-top:50px; margin:0 auto;}
+            #footer .topMenu ul{float:left;}
+            #footer .topMenu ul li{margin-right:50px;}
+            #footer .topMenu a{color:#fff;}
+            
+            #footer .topMenu .left{width:300px;}
+            #footer .topMenu .left li{width:250px; line-height:40px;}
+            #footer .topMenu .left li a{font-size:17px;}
+
+            #footer .topMenu .right{width:700px;}
+            #footer .topMenu .right li{width:300px; float:left;}
+            
+            #footer .topMenu .right .title{font-size:20px;}
+            #footer .topMenu .right .title a{display:block;}
+            #footer .topMenu .right .title a span{display:block; padding-bottom:30px;}
+            #footer .topMenu .right .title a strong{display:block; font-size:25px;}
+            #footer .topMenu .right .text{padding-top:30px; color:#aaa; font-size:14px; line-height:20px;}
+            
+
+            #footer .topMenu .contact{width:280px;}
+            #footer .topMenu .contact li{margin:8px; float:left;}
+            #footer .topMenu .contact li a{display:block; width:27px; height:27px;}
+            #footer .topMenu .contact li a img{width:100%;}
+
+        /*############## footer / infoMenu ##############*/
+            #footer .infoMenu{width:1280px; margin:0 auto 20px;}
+            #footer .infoMenu ul{width:100%}
+            #footer .infoMenu li{display:inline;}
+            #footer .infoMenu li a{color:#fff; font-size:13px; padding-right:10px;}
+
+        /*############## footer / address ##############*/
+            #footer address{width:1280px; margin:0 auto; color:#aaa; font-style:normal; font-size:13px;}
+            #footer address p{display:inline; padding-right:10px;}
+            #footer address p a{color:#fff; text-decoration:underline;}
+        /*############## footer / copyright ##############*/
+            #copyright{width:100%;}
+            #copyright p{width:1280px; margin:0 auto; line-height:100px; font-size:13px; color:#aaa;}
+
+
+
+
+
+        /*############## pc버전 #############*/
+		@media all and (min-width:1025px){
+
+            /*################ main ##############*/
+                #main:hover{height:1200px;}
+                #main:hover .bottom_text{top:80%;}
+                #main:hover .imgArea .main_left{left:5%; top:400px;}
+                #main:hover .imgArea .main_right{left:50%;}
+
+
+            /*################## lookBook / look0 ################*/
+                #lookBook .look0 .bg{background-attachment:fixed;}
+                #lookBook .look_sub p{height:100%; float:left; overflow:hidden;}
+
+                #lookBook .look_sub p img{transform:scale(1.2); transition:transform 0.5s linear;}
+                #lookBook .look0:hover .look_sub p img{transform:scale(1.0);}
+
+            /*################## lookBook / look2 ################*/
+                #lookBook .look2 .bg{background-attachment:fixed;}
+                #lookBook .look2 .look_sub{width:1250px; height:450px; margin:0 auto;}
+                #lookBook .look2:hover .look_sub p img{transform:scale(1.0);}
+
+                
+            /*################### hot_tok_area ##################*/
+                #hot_tok li{width:325px; height:578px; margin-right:25px; float:left; position:relative;}
+
+                #hot_tok li span{width:5px; height:5px; background-color:rgba(255,0,0,0); position:absolute; transition:all 0.2s linear;}
+                #hot_tok li:hover span{background-color:rgba(255,0,0,1);}
+                
+                #hot_tok li .leftT{left:0; top:0;}
+                #hot_tok li:hover .leftT{width:100%;}
+                
+                #hot_tok li .rightT{right:0; top:0;}
+                #hot_tok li:hover .rightT{height:100%;  transition-delay:0.2s;}
+                
+                #hot_tok li .rightB{right:0; bottom:0;}
+                #hot_tok li:hover .rightB{width:100%;  transition-delay:0.4s;}
+
+                #hot_tok li .leftB{left:0; bottom:0;}
+                #hot_tok li:hover .leftB{height:100%;  transition-delay:0.6s;}
+
+                #hot_tok ul:after{content:""; display:block; clear:both;}
+        }
+
+
+        /*반응형 제작중에 있습니다*/
+        /*############## 태블릿 pc 버전 #############*/
+		@media all and (min-width:768px) and (max-width:1024px){
+            
+            /*############### visual #############*/
+                #visual .textBox{width:700px; left:5%; top:20%;}
+                /*#visual h2{left:10%; top:26%;}
+                #visual .text{left:10%; top:80%;}*/
+
+            /*################ main ##############*/
+                #main{height:1400px;}
+                #main strong{font-size:80px;}
+
+                #main .top_text{left:50%;}
+                #main .bottom_text{left:10%; top:83%;}
+
+                #main .imgArea{width:700px; padding-top:30px;}
+                #main .imgArea p{width:70%; left:0; top:30px;}
+                #main .imgArea p img{width:100%;}
+                #main .imgArea .main_left{left:0; top:40px;}
+                #main .imgArea .main_right{left:30%; top:600px;}
+
+            /*################## lookBook ################*/
+                #lookBook .title{font-size:70px; margin:0 auto;}
+                #lookBook .look_main_photo{width:500px;}
+
+            /*################## lookBook / look0 ################*/
+                #lookBook .look0 .title{width:490px; margin:0 auto 30px;}
+
+                #lookBook .look0 .look_sub{height:300px; margin:0 auto;}
+
+                #lookBook .look_sub p{height:100%; float:left; overflow:hidden;}
+                #lookBook .look_sub p img{height:100%;}
+
+                #lookBook .look_sub .sub_img0{width:300px; margin-left:5%; margin-right:30px;}
+                #lookBook .look_sub .sub_img1{width:489px;}
+
+
+
+            /*################## lookBook / look1 ################*/
+                #lookBook .look1{width:100%; padding-top:50px;}
+                #lookBook .look1 .title{width:700px; padding-left:10px; letter-spacing:-2px; text-shadow:1px 1px 5px rgba(0,0,0,0.1);}
+
+                #lookBook .look1 .look_img{width:100%; height:1300px; position:relative;}
+                #lookBook .look1 .look_img p{width:300px; position:absolute;}
+                #lookBook .look1 .look_img p img{width:100%;}
+                #lookBook .look1 .look_img .main_photo0{width:350px; left:10%; top:230px;}
+                #lookBook .look1 .look_img .main_photo1{left:55%; top:50px;}
+                #lookBook .look1 .look_img .main_photo2{width:350px; left:50%; top:700px;}
+
+            /*################## lookBook / look2 ################*/
+                #lookBook .look2{width:100%; padding-bottom:50px;}
+
+                #lookBook .look2 .look_sub{height:300px;}
+                #lookBook .look2 .title{width:550px; margin:0 auto 30px;}
+
+            
+
+            /*################## lookBook / bottom_text ################*/
+                #lookBook .bottom_text{height:150px; text-indent:20px; font-size:80px;}
+            
+
+            /*################### livenmore ##################*/
+                #livenmore{width:100%; height:500px; overflow:hidden; border-bottom:1px dashed #777;; position:relative;}
+                #livenmore h4{width:250px; height:100px; font-size:50px; letter-spacing:-5px; position:absolute; left:5%; top:110px;}
+                #livenmore .desc{width:250px; position:absolute; left:5%; top:200px; font-size:14px; line-height:25px; color:#888;}
+                #livenmore .video{width:2000px; height:300px; position:absolute; left:38%; top:110px;}
+                #livenmore .video li{width:550px; height:600px; overflow:hidden; margin-right:30px; float:left;}x
+
+
+            /*################### hot_tok_area ##################*/
+                #hot_tok_area h4{font-size:50px; line-height:80px; padding:80px 0 30px;}
+                #hot_tok{width:767px; overflow:hidden;}
+                #hot_tok ul{width:1500px;}
+                #hot_tok li{width:325px; height:578px; margin-right:25px; float:left; border-radius:10px; overflow:hidden;}
+                #hot_tok li a{width:100%; display:block;}
+                #hot_tok li a img{width:100%;}
+
+
+            
+
+        }
+        /*############## 스마트폰 가로버전 #############*/
+		@media all and (min-width:481px) and (max-width:767px){
+            
+            
+            /*############## header ##############*/
+                #header{width:100%;}
+                h1{width:80px; left:15px; top:15px;}
+                h1 a img{width:100%;}
+
+                .nav_m_btn{display:block;}
+
+                #nav{display:none;}
+
+            /*############### visual #############*/
+                #visual #mobile_bg{display:block;}
+                #visual #mobile_bg ul{width:481px;}
+
+                #visual #screen{display:none;}
+                #visual .btn{display:none;}
+
+                #visual #textBox{width:481px; left:1%; top:50%;}
+                #visual h2{font-size:50px;}
+                #visual h2 span{font-size:17px;}
+                #visual .text{font-size:15px;}
+
+            /*################ main ##############*/
+                #main{height:900px;}
+                #main strong{font-size:50px;}
+
+                #main .top_text{left:40%;}
+                #main .bottom_text{left:10%; top:83%;}
+
+                #main .imgArea{width:400px; padding-top:30px;}
+                #main .imgArea p{width:74%; left:0; top:30px;}
+                #main .imgArea p img{width:100%;}
+                #main .imgArea .main_left{left:0; top:40px;}
+                #main .imgArea .main_right{left:100px; top:400px;}
+
+            /*################## lookBook ################*/
+                #lookBook .title{font-size:50px; margin:0 auto;}
+                #lookBook .look_main_photo{width:380px;}
+
+            /*################## lookBook / look0 ################*/
+                #lookBook .look0 .title{width:350px; margin:0 auto 30px;}
+
+                #lookBook .look0 .look_sub{width:400px; overflow:hidden;}
+                #lookBook .look_sub p img{width:100%;}
+
+                #lookBook .look_sub .sub_img0{width:230px; margin-bottom:30px;}
+                #lookBook .look_sub .sub_img1{width:350px; margin-left:30px;}
+
+            /*################## lookBook / look1 ################*/
+                #lookBook .look1{width:100%; padding-top:50px;}
+                #lookBook .look1 .title{width:400px; padding-left:10px; letter-spacing:-2px; text-shadow:1px 1px 5px rgba(0,0,0,0.1);}
+
+                #lookBook .look1 .look_img{width:100%; height:1100px; position:relative;}
+                #lookBook .look1 .look_img p{width:200px; position:absolute;}
+                #lookBook .look1 .look_img p img{width:100%;}
+                #lookBook .look1 .look_img .main_photo0{width:250px; left:10%; top:230px;}
+                #lookBook .look1 .look_img .main_photo1{left:45%; top:50px;}
+                #lookBook .look1 .look_img .main_photo2{width:250px; left:40%; top:600px;}
+
+            /*################## lookBook / look2 ################*/
+                #lookBook .look2{width:100%; padding-bottom:50px;}
+
+                #lookBook .look2 .title{width:400px; margin:0 auto 30px;}
+
+                #lookBook .look2 .look_sub{width:400px; height:450px; margin:0 auto;}
+            
+
+            /*################## lookBook / bottom_text ################*/
+                #lookBook .bottom_text{height:90px; text-indent:20px; font-size:60px;}
+            
+
+            /*################### livenmore ##################*/
+                #livenmore{width:100%; height:700px; position:static;}
+                #livenmore h4{width:270px; height:80px; padding-top:100px; font-size:50px; letter-spacing:-3px; position:static; margin:0 auto;}
+                #livenmore .desc{width:270px; position:static; font-size:15px; line-height:23px; text-align:center; margin:0 auto 40px;}
+                #livenmore .video{width:300px; height:173px; position:static; margin:0 auto;}
+                #livenmore .video ul{width:100%;}
+                #livenmore .video li{width:100%; margin-right:0; float:none;}
+
+
+            /*################### hot_tok_area ##################*/
+                #hot_tok_area h4{font-size:50px; line-height:80px; padding:80px 0 30px;}
+                #hot_tok{width:300px; height:534px; margin:0 auto 50px; overflow:hidden;}
+                #hot_tok ul{width:100%;}
+                #hot_tok li{width:100%; height:534px; border-radius:10px; overflow:hidden;}
+                #hot_tok li a{width:100%; display:block;}
+                #hot_tok li a img{width:100%;}
+
+
+            /*############## footer / topMenu ##############*/
+                #footer .topMenu{width:300px; height:580px;}
+                #footer .topMenu ul li{margin-right:0;}
+                
+                #footer .topMenu .left{width:300px;}
+                #footer .topMenu .left li{width:250px;}
+
+                #footer .topMenu .right{width:300px;}
+                #footer .topMenu .right li{padding-top:50px;}
+
+                #footer .topMenu .right .customer{padding-top:20px; padding-bottom:30px;}
+                
+                #footer .topMenu .right .title{font-size:15px;}
+                #footer .topMenu .right .title a span{padding-bottom:10px;}
+                #footer .topMenu .right .title a strong{font-size:18px;}
+                #footer .topMenu .right .text{padding-top:10px; font-size:12px; line-height:17px;}
+                
+
+            /*############## footer / infoMenu ##############*/
+                #footer .infoMenu{width:300px;}
+                #footer .infoMenu li a{font-size:12px; padding-right:13px;}
+
+            /*############## footer / address ##############*/
+                #footer address{width:300px; font-size:11px;}
+                #footer address p{display:block; line-height:18px; padding-right:0;}
+
+                #footer address .desc{color:#777}
+                
+            /*############## footer / copyright ##############*/
+                #copyright p{width:300px;}
+
+        }
+        /*############## 스마트폰 세로버전 #############*/
+		@media all and (min-width:320px) and (max-width:480px){
+            
+            /*############## header ##############*/
+                #header{width:100%;}
+                h1{width:80px; left:15px; top:15px;}
+                h1 a img{width:100%;}
+
+                .nav_m_btn{display:block;}
+
+                #nav{display:none;}
+
+                #top_menu{width:30%; right:10px; top:18px;}
+                #top_menu p{font-size:12px;}
+
+            /*############### visual #############*/
+                #visual{height:522px;}
+                #visual #mobile_bg{display:block;}
+
+                #visual #screen{display:none;}
+                #visual .btn{display:none;}
+
+
+                #visual #textBox{width:90%; left:4%; top:60%;}
+                #visual h2{width:300px; font-size:30px;}
+                #visual h2 span{font-size:17px;}
+                #visual .text{width:300px; font-size:13px;}
+
+            /*################ main ##############*/
+                #main{height:800px;}
+                #main strong{font-size:50px;}
+
+                #main .top_text{left:20%;}
+                #main .bottom_text{left:10%; top:75%;}
+
+                #main .imgArea{width:320px; padding-top:30px;}
+                #main .imgArea p{width:74%; left:30px; top:30px;}
+                #main .imgArea p img{width:100%;}
+                #main .imgArea .main_left{left:20px; top:40px;}
+                #main .imgArea .main_right{left:65px; top:320px;}
+
+            /*################## lookBook ################*/
+                #lookBook .title{font-size:40px; margin:0 auto;}
+                #lookBook .look_main_photo{width:250px;}
+
+            /*################## lookBook / look0 ################*/
+                #lookBook .look0 .title{width:265px; color:rgb(211, 16, 22); margin:0 auto 30px;}
+
+                #lookBook .look0 .look_sub{width:290px; overflow:hidden;}
+                #lookBook .look_sub p img{width:100%;}
+
+                #lookBook .look_sub .sub_img0{width:220px; margin-bottom:30px;}
+                #lookBook .look_sub .sub_img1{width:260px; margin-left:30px;}
+
+            /*################## lookBook / look1 ################*/
+                #lookBook .look1{width:100%; padding-top:50px;}
+                #lookBook .look1 .title{width:320px; color:#f34b7f; padding-left:10px; letter-spacing:-2px; text-shadow:1px 1px 5px rgba(0,0,0,0.1);}
+
+                #lookBook .look1 .look_img{width:100%; height:1100px; position:relative;}
+                #lookBook .look1 .look_img p{width:200px; position:absolute;}
+                #lookBook .look1 .look_img p img{width:100%;}
+                #lookBook .look1 .look_img .main_photo0{width:250px; left:10%; top:300px;}
+                #lookBook .look1 .look_img .main_photo1{left:30%; top:50px;}
+                #lookBook .look1 .look_img .main_photo2{width:250px; left:30%; top:600px;}
+
+            /*################## lookBook / look2 ################*/
+                #lookBook .look2{width:100%; padding-bottom:50px;}
+
+                #lookBook .look2 .title{width:300px; color:#e7ada7; margin:0 auto 30px;}
+
+                #lookBook .look2 .look_sub{width:300px; height:450px; margin:0 auto;}
+            
+
+            /*################## lookBook / bottom_text ################*/
+                #lookBook .bottom_text{height:90px; text-indent:20px; font-size:60px;}
+            
+
+            /*################### livenmore ##################*/
+                #livenmore .livenmore{width:100%; height:700px;}
+
+                #livenmore .livenmore .desc{width:270px; float:none; padding-top:0; margin:0 auto 40px;}
+                #livenmore .livenmore .desc h4{width:100%; height:100px; font-size:50px; letter-spacing:-3px;}
+                #livenmore .livenmore .desc p{width:100%; font-size:15px; line-height:23px; text-align:center;}
+                #livenmore .livenmore .video{width:300px; height:173px; margin:0 auto; float:none;}
+                #livenmore .livenmore .video .video_film{width:100%;}
+                #livenmore .livenmore .video .video_film li{width:100%; margin-right:0; float:none;}
+                #livenmore .livenmore .video .video_film li p{display:block; width:100%;}
+                #livenmore .livenmore .video .video_film li p video{width:100%;}
+
+                #livenmore .video_btn p{position:absolute; height:50px; top:300px; cursor:pointer;}
+                #livenmore .video_btn p img{height:50%;}
+                #livenmore .video_btn .nextBtn{right:2px;}
+                #livenmore .video_btn .prevBtn{left:2px;}
+
+
+            /*################### hot_tok_area ##################*/
+                #hot_tok_area h4{font-size:50px; line-height:80px; padding:80px 0 30px;}
+                #hot_tok{width:300px; height:534px; margin:0 auto 50px; overflow:hidden;}
+                #hot_tok ul{width:100%;}
+                #hot_tok li{width:100%; height:534px; border-radius:10px; overflow:hidden;}
+                #hot_tok li a{width:100%; display:block;}
+                #hot_tok li a img{width:100%;}
+
+
+            /*############## footer / topMenu ##############*/
+                #footer .topMenu{width:300px; height:580px;}
+                #footer .topMenu ul li{margin-right:0;}
+                
+                #footer .topMenu .left{width:300px;}
+                #footer .topMenu .left li{width:250px;}
+
+                #footer .topMenu .right{width:300px;}
+                #footer .topMenu .right li{padding-top:50px;}
+
+                #footer .topMenu .right .customer{padding-top:20px; padding-bottom:30px;}
+                
+                #footer .topMenu .right .title{font-size:15px;}
+                #footer .topMenu .right .title a span{padding-bottom:10px;}
+                #footer .topMenu .right .title a strong{font-size:18px;}
+                #footer .topMenu .right .text{padding-top:10px; font-size:12px; line-height:17px;}
+                
+
+            /*############## footer / infoMenu ##############*/
+                #footer .infoMenu{width:300px;}
+                #footer .infoMenu li a{font-size:12px; padding-right:13px;}
+
+            /*############## footer / address ##############*/
+                #footer address{width:300px; font-size:11px;}
+                #footer address p{display:block; line-height:18px; padding-right:0;}
+
+                #footer address .desc{color:#777}
+                
+            /*############## footer / copyright ##############*/
+                #copyright p{width:300px;}
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+
+            /*######## header ########*/
+            $("#nav_m").hide();
+
+            $(".nav_m_btn").click(function(){
+                $("#nav_m").stop().slideDown();
+            });
+
+            $("#nav_m").mouseover(function(){
+                $(this).stop().show();
+            }).mouseout(function(){
+                $(this).stop().slideUp();
+            });
+			
+	
+			
+	
+			$("#nav_tit li:eq(0) a").bind("focusin mouseover",function(){
+                $("#nav ol").css({"transform":"rotatex(-90deg)"});
+				$(this).parent().parent().css({"transform":"rotatex(-90deg)"});
+				$("#nav_inn_shop").css({"transform":"rotatex(0deg)"});
+			});
+            $("#nav_tit li:eq(1) a").bind("focusin mouseover",function(){
+                $("#nav ol").css({"transform":"rotatex(-90deg)"});
+				$(this).parent().parent().css({"transform":"rotatex(-90deg)"});
+				$("#nav_inn_artist").css({"transform":"rotatex(0deg)"});
+			});
+            $("#nav_tit li:eq(2) a").bind("focusin mouseover",function(){
+                $("#nav ol").css({"transform":"rotatex(-90deg)"});
+				$(this).parent().parent().css({"transform":"rotatex(-90deg)"});
+				$("#nav_inn_play").css({"transform":"rotatex(0deg)"});
+			});
+            $("#nav_tit li:eq(3) a").bind("focusin mouseover",function(){
+                $("#nav ol").css({"transform":"rotatex(-90deg)"});
+				$(this).parent().parent().css({"transform":"rotatex(-90deg)"});
+				$("#nav_inn_community").css({"transform":"rotatex(0deg)"});
+			});
+
+			$("nav").bind("blur mouseleave",function(){
+				$("nav ol").css({"transform":"rotatex(-90deg)"});
+				$("#nav_tit").css({"transform":"rotatex(0deg)"});
+			});
+	
+		
+
+            /*######## container ########*/
+
+            /*######## container / visual / screen ########*/
+            $("#screen .film").prepend($("#screen .scene:last"));
+            $("#screen .film").css({"marginLeft":"-1920px"});
+
+            $(".nextBtn").click(function(){
+                $("#screen .film").animate({"marginLeft":"-=1920px"},500,"swing",function(){
+
+                    $("#screen .film").append($("#screen .scene:eq(0)"));
+
+                    $("#screen .film").css({"marginLeft":"-1920px"});
+                });
+            });
+
+            $(".prevBtn").click(function(){
+                $("#screen .film").animate({"marginLeft":"+=1920px"},500,"swing",function(){
+
+                    $("#screen .film").prepend($("#screen .scene:last"));
+
+                    $("#screen .film").css({"marginLeft":"-1920px"});
+                });
+            });
+
+            /*######## container / visual / textBox ########*/
+            $("#textBox .film").prepend($("#textBox .scene:last"));
+            $("#textBox .film").css({"marginLeft":"-1920px"});
+
+            $(".nextBtn").click(function(){
+                $("#textBox .film").animate({"marginLeft":"-=1920px"},500,"swing",function(){
+
+                    $("#textBox .film").append($("#textBox .scene:eq(0)"));
+
+                    $("#textBox .film").css({"marginLeft":"-1920px"});
+                });
+            });
+
+            $(".prevBtn").click(function(){
+                $("#textBox .film").animate({"marginLeft":"+=1920px"},500,"swing",function(){
+
+                    $("#textBox .film").prepend($("#textBox .scene:last"));
+
+                    $("#textBox .film").css({"marginLeft":"-1920px"});
+                });
+            });
+
+
+            /*######## container / livenmore / video ########*/
+            $("#livenmore .video_film").prepend($("#livenmore .video_film li:last"));
+            $("#livenmore .video_film").css({"marginLeft":"-700px"});
+
+            $(".video_btn .nextBtn").click(function(){
+                $("#livenmore .video_film").animate({"marginLeft":"-=700px"},500,"swing",function(){
+
+                    $("#livenmore .video_film").append($("#livenmore .video_film li:eq(0)"));
+
+                    $("#livenmore .video_film").css({"marginLeft":"-700px"});
+                });
+            });
+
+            $(".video_btn .prevBtn").click(function(){
+                $("#livenmore .video_film").animate({"marginLeft":"+=700px"},500,"swing",function(){
+
+                    $("#livenmore .video_film").prepend($("#livenmore .video_film li:last"));
+
+                    $("#livenmore .video_film").css({"marginLeft":"-700px"});
+                });
+            });
+
+            /*########### container / hot_tok_area ############*/
+            $("#view, #full").hide();
+
+            $("#hot_tok ul li").click(function(){
+                $("#view, #full").show();
+
+                var num=$(this).children("a").attr("href").substring(7,8);
+                $("#view").html("<img src='img/hot"+num+".jpeg' alt='hot0'/>");
+
+                return false;
+            });
+
+            $("#view, #full").click(function(){
+                $("#view, #full").hide();
+            });
+            
+        });
+    </script>
+ </head>
+ <body>
+  <div id="wrap">
+      <header id="header">
+          <h1>
+              <a href="index.html" title="espoir">
+                  <img src="img/logo_b.png" alt="에스쁘아"/>
+              </a>
+          </h1>
+          <p class="nav_m_btn">MENU &gt;</p>
+          <nav>
+              <div id="nav">
+                <ul id="nav_tit">
+                    <li><a href="#" title="SHOP">SHOP</a></li>
+                    <li><a href="#" title="ARTIST SERVICE">ARTIST SERVICE</a></li>
+                    <li><a href="#" title="nPLAY">&amp; PLAY</a></li>
+                    <li><a href="#" title="COMMUNITY">COMMUNITY</a></li>
+                </ul>
+                <ol id="nav_inn_shop">
+                    <li><a href="sub_best.html" title="best">best</a></li>
+                    <li><a href="sub_lip.html" title="lip">lip</a></li>
+                    <li><a href="sub_eye.html" title="eye">eye</a></li>
+                    <li><a href="sub_face.html" title="face">face</a></li>
+                    <li><a href="sub_sun.html" title="sun">sun</a></li>
+                    <li><a href="#" title="lookbook">lookbook</a></li>
+                </ol>
+                <ol id="nav_inn_artist">
+                    <li><a href="#" title="ONLINE CONSULTING">ONLINE CONSULTING</a></li>
+                    <li><a href="#" title="OFFLINE CONSULTING">OFFLINE CONSULTING</a></li>
+                </ol>
+                <ol id="nav_inn_play">
+                    <li><a href="sub_mix.html" title="powdernplay">powder &amp; play</a></li>
+                    <li><a href="sub_mix.html" title="glitternplay">gitter &amp; play</a></li>
+                </ol>
+                <ol id="nav_inn_community">
+                    <li><a href="#" title="notice">notice</a></li>
+                    <li><a href="sub_QnA.html" title="QnA">Q&amp;A</a></li>
+                    <li><a href="#" title="event">event</a></li>
+                    <li><a href="#" title="review">review</a></li>
+                    <li><a href="#" title="store">store</a></li>
+                </ol>
+              </div>
+              <div id="nav_m">
+                <ul>
+                    <li class="tit"><a href="#none" title="SHOP">SHOP</a></li>
+                    <li><a href="sub_best.html" title="best">best</a></li>
+                    <li><a href="sub_lip.html" title="lip">lip</a></li>
+                    <li><a href="sub_eye.html" title="eye">eye</a></li>
+                    <li><a href="sub_face.html" title="face">face</a></li>
+                    <li><a href="sub_sun.html" title="sun">sun</a></li>
+                    <li class="tit"><a href="#none" title="ARTIST SERVICE">ARTIST SERVICE</a></li>
+                    <li><a href="#" title="ONLINE CONSULTING">ONLINE CONSULTING</a></li>
+                    <li><a href="#" title="OFFLINE CONSULTING">OFFLINE CONSULTING</a></li>
+                    <li class="tit"><a href="#none" title="nPLAY">&amp; PLAY</a></li>
+                    <li><a href="sub_mix.html" title="powdernplay">powder &amp; play</a></li>
+                    <li><a href="sub_mix.html" title="glitternplay">gitter &amp; play</a></li>
+                    <li class="tit"><a href="#none" title="COMMUNITY">COMMUNITY</a></li>
+                    <li><a href="#" title="notice">notice</a></li>
+                    <li><a href="sub_QnA.html" title="QnA">Q&amp;A</a></li>
+                    <li><a href="#" title="event">event</a></li>
+                    <li><a href="#" title="review">review</a></li>
+                    <li><a href="#" title="store">store</a></li>
+                </ul>
+              </div>
+              <div id="top_menu">
+                  <p><a href="#" title="로그인">로그인</a></p>
+                  <p><a href="join.php" title="회원가입">회원가입</a></p>
+              </div>
+          </nav>
+      </header>
+      <div id="container">
+          <section id="visual">
+              <h3>visual</h3>
+              <div id="screen">
+                  <ul class="film">
+                      <li class="scene">
+                        <img src="img/visual_bg1.jpg" alt="배경이미지1"/>
+                      </li>
+                      <li class="scene">
+                        <img src="img/visual_bg2.jpeg" alt="배경이미지2"/>
+                      </li>
+                      <li class="scene">
+                        <img src="img/visual_bg3.jpeg" alt="배경이미지3"/>
+                      </li>
+                      <li class="scene">
+                        <img src="img/visual_bg4.jpg" alt="배경이미지4"/>
+                      </li>
+                  </ul>
+              </div>
+              <div id="mobile_bg">
+                  <ul class="m_bg_film">
+                      <li>
+                          <img src="img/visual_bg1_mb.jpeg" alt="모바일 배경1"/>
+                      </li>
+                      <li>
+                        <img src="img/visual_bg2_mb.jpeg" alt="모바일 배경2"/>
+                      </li>
+                  </ul>
+              </div>
+              <div id="textBox">
+                <ul class="film">
+                    <li class="scene">
+                        <h2>
+                            <span>EVENT</span><br/>
+                            <a href="#" title="이벤트">
+                                NEW 비 벨벳 라인 론칭 AR체험 EVENT
+                            </a>
+                        </h2>
+                        <p class="text">증강현실세계에서 신제품을 경험하고 이벤트 참여 기프트도 GET!</p>
+                    </li>
+                    <li class="scene">
+                        <h2>
+                            <span>ONLY 공식몰</span><br/>
+                            <a href="#" title="이벤트">
+                                공식몰 회원 전용 특가, 핫딜존 OPEN!
+                            </a>
+                        </h2>
+                        <p class="text">에스쁘아 회원 전용 up to 50%, 1만원 특가의 기회</p>
+                    </li>
+                    <li class="scene">
+                        <h2>
+                            <span>New</span><br/>
+                            <a href="#" title="이벤트">
+                                출시직후 품절대란, 에스쁘아 신상기획전
+                            </a>
+                        </h2>
+                        <p class="text">#더 브로우 #꾸뛰르 립 틴트 워터리 샤인 #리얼 아이 애교살 스틱</p>
+                    <li class="scene">
+                        <h2>
+                            <span>May Present</span><br/>
+                            <a href="#" title="이벤트">
+                                에스쁘아 공식몰만의 SPECIAL GIFT
+                            </a>
+                        </h2>
+                        <p class="text">에스쁘아 공식몰만의 SPECIAL GIFT</p>
+                    </li>
+                </ul>
+              </div>
+              <div class="btn">
+                <p class="nextBtn">
+                    <img src="img/btn_next.png" alt="다음버튼"/>
+                </p>
+                <p class="prevBtn">
+                    <img src="img/btn_prev.png" alt="이전버튼"/>
+                </p>
+              </div> 
+          </section>
+          <section id="main">
+              <h3>main item</h3>
+              <strong class="top_text">PROTAILOR</strong>
+              <div class="imgArea">
+                  <p class="main_left">
+                      <img src="img/main.jpeg" alt="메인이미지0"/>
+                  </p>
+                  <p class="main_right">
+                      <img src="img/main1.png" alt="메인이미지1"/>
+                  </p>
+              </div>
+              <strong class="bottom_text">BE VELVET</strong>
+          </section>
+          <section id="lookBook">
+              <h3>lookbook</h3>
+              <div>
+                  <section class="look0">
+                      <h3>look0</h3>
+                      <div class="bg">
+                          <p class="look_main_photo">
+                              <img src="img/bevelvetlook_main.jpeg" alt="be velvel look 메인 이미지"/>
+                          </p>
+                      </div>
+                      <p class="title">
+                          <strong>BE VELVET LOOK</strong>
+                      </p>
+                      <div class="look_sub">
+                          <p class="sub_img0">
+                              <img src="img/bevelvetlook_sub0.jpeg" alt="be velvet look 서브 이비지"/>
+                          </p>
+                          <p class="sub_img1">
+                              <img src="img/bevelvetlook_sub1.jpeg" alt="be velvet look 서브 이비지"/>
+                          </p>
+                      </div>
+                  </section>
+                  <section class="look1">
+                      <h3>look1</h3>
+                      <p class="title">
+                          <strong>WATER VELVET LOOK</strong>
+                      </p>
+                      <div class="look_img">
+                          <p class="main_photo0">
+                              <img src="img/waterlook_main0.jpeg" alt="water velvet look 이미지"/>
+                          </p>
+                          <p class="main_photo1">
+                              <img src="img/waterlook_main1.jpeg" alt="water velvet look 이미지"/>
+                          </p>
+                          <p class="main_photo2">
+                              <img src="img/waterlook_main2.jpeg" alt="water velvet look 이미지"/>
+                          </p>
+                      </div>
+                  </section>
+                  <section class="look2">
+                      <h3>look2</h3>
+                      <div class="bg">
+                          <p class="look_main_photo">
+                              <img src="img/peachlook_main.jpeg" alt="peach look 메인 이미지"/>
+                          </p>
+                      </div>
+                      <p class="title">
+                          <strong>PEACH BASE LOOK</strong>
+                      </p>
+                      <div class="look_sub">
+                            <p class="sub_img0">
+                              <img src="img/peachlook_sub0.jpeg" alt="peach look 서브 이비지"/>
+                            </p>
+                            <p class="sub_img1">
+                              <img src="img/peachlook_sub1.jpeg" alt="peach look 서브 이비지"/>
+                            </p>
+                      </div>
+                  </section>
+                  <p class="bottom_text">
+                      <span>EXPECT BETTER YOU</span>
+                  </p>
+              </div>
+          </section>
+          <section id="livenmore">
+              <h3>livenmore</h3>
+              <div class="livenmore">
+                <div class="desc">
+                    <h4>LIVE &amp; MORE</h4>
+                    <p class="desc">
+                      [에스쁘아] KEYX조효진의 키 레전드 메이크업 커버 with 비벨벳<br/>
+      
+                      에스쁘아의 NEW 엠베서더 @키 와<br/>
+                      크리에이터 @조효진 의 특별한 만남!<br/>
+                      
+                      에스쁘아 비벨벳과 신제품으로 완성하는<br/>
+                      KEY의 레전드 메이크업 커버 영상을<br/>
+                      지금 확인해보세요!<br/>
+                      
+                      *HQ on Youtube<br/>
+                      
+                      #에스쁘아 #키 #조효진 #비벨벳<br/>
+                    </p>
+                </div>
+                <div class="video">
+                    <ul class="video_film">
+                      <li>
+                          <p>
+                            <video controls poster="img/live0.jpeg" width=700>
+                                <source src="video/livenmore1.mp4" type="video/mp4"/>
+                            </video>
+                          </p>
+                      </li>
+                      <li>
+                          <p>
+                            <video controls poster="img/live1.jpeg" width=700>
+                                <source src="video/livenmore1.mp4" type="video/mp4"/>
+                            </video>
+                          </p>
+                      </li>
+                      <li>
+                          <p>
+                            <video controls poster="img/live2.jpeg" width=700>
+                                <source src="video/livenmore1.mp4" type="video/mp4"/>
+                            </video>
+                        </p>
+                      </li>
+                    </ul>
+                </div>
+                <div class="video_btn">
+                    <p class="nextBtn">
+                        <img src="img/livenmore_next.png" alt="다음버튼"/>
+                    </p>
+                    <p class="prevBtn">
+                        <img src="img/livenmore_prev.png" alt="이전버튼"/>
+                    </p>
+                </div>
+              </div>
+          </section>
+          <section id="hot_tok_area">
+              <h4>HOT TOK</h4>
+              <div id="hot_tok">
+                  <ul>
+                    <li>
+                        <a href="img/hot0.jpeg" title="hot0">
+                            <img src="img/hot0.jpeg" alt="hot0"/>
+                        </a>
+                        <span class="leftT"></span>
+                        <span class="rightT"></span>
+                        <span class="rightB"></span>
+                        <span class="leftB"></span>
+                    </li>
+                    <li>
+                        <a href="img/hot1.jpeg" title="hot1">
+                            <img src="img/hot1.jpeg" alt="hot1"/>
+                        </a>
+                        <span class="leftT"></span>
+                        <span class="rightT"></span>
+                        <span class="rightB"></span>
+                        <span class="leftB"></span>
+                    </li>
+                    <li>
+                        <a href="img/hot2.jpeg" title="hot2">
+                            <img src="img/hot2.jpeg" alt="hot2"/>
+                        </a>
+                        <span class="leftT"></span>
+                        <span class="rightT"></span>
+                        <span class="rightB"></span>
+                        <span class="leftB"></span>
+                    </li>
+                    <li>
+                        <a href="img/hot3.jpeg" title="hot3">
+                            <img src="img/hot3.jpeg" alt="hot3"/>
+                        </a>
+                        <span class="leftT"></span>
+                        <span class="rightT"></span>
+                        <span class="rightB"></span>
+                        <span class="leftB"></span>
+                    </li>
+                  </ul>
+              </div>
+              <div id="view"></div>
+              <div id="full"></div>
+          </section>
+      </div>
+      <footer id="footer">
+          <div class="topMenu">
+              <ul class="left">
+                  <li><a href="#" title="비회원주문조회">비회원주문조회</a></li>
+                  <li><a href="#" title="매장찾기">매장 찾기</a></li>
+                  <li><a href="#" title="브랜드소개">브랜드 소개</a></li>
+                  <li><a href="#" title="멤버쉽">멤버쉽</a></li>
+                  <li><a href="#" title="사이트맵">사이트맵</a></li>
+              </ul>
+              <ul class="right">
+                <li>
+                    <p class="title">
+                        <a href="#" title="makeup">
+                            <span>MAKEUP</span>
+                            <strong>BEAUTY COUNSELING</strong>
+                        </a>
+                    </p>
+                    <p class="text">
+                        언제 어디서든 언택트!<br/>
+                        아티스트와 상담하세요!
+                    </p>
+                </li>
+                <li class="customer">
+                    <p class="title">
+                        <a href="#" title="makeup">
+                            <span>고객센터</span>
+                            <strong>080 619 8888</strong>
+                        </a>
+                    </p>
+                    <p class="text">
+                        상담시간 13:00 ~ 17:00<br/>
+                        (월~금, 공휴일 제외)
+                    </p>
+                </li>
+              </ul>
+              <ul class="contact">
+                <li>
+                    <a href="#" title="insta">
+                        <img src="img/ico_insta.png" alt="instagram"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="facebook">
+                        <img src="img/ico_facebook.png" alt="facebook"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="twitter">
+                        <img src="img/ico_twitter.png" alt="twitter"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="kako">
+                        <img src="img/ico_kakao.png" alt="kakao"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="blog">
+                        <img src="img/ico_blog.png" alt="blog"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="mail">
+                        <img src="img/ico_mail.png" alt="mail"/>
+                    </a>
+                </li>
+              </ul>
+          </div>
+          <div class="infoMenu">
+              <ul>
+                  <li><a href="#" title="서비스 이용약관">서비스 이용약관</a></li>
+                  <li><a href="#" title="개인정보처리방침">개인정보처리방침</a></li>
+                  <li><a href="#" title="영상기기관리방침">영상기기관리방침</a></li>
+                  <li><a href="#" title="사업자 정보 확인">사업자 정보 확인</a></li>
+                  <li><a href="#" title="이메일 무단수집 거부">이메일 무단수집 거부</a></li>
+                  <li><a href="#" title="전자공고">전자공고</a></li>
+              </ul>
+          </div>
+          <address>
+              <p>(주)에스쁘아 대표이사: 최민정</p>
+              <p>본사 : 서울특별시 용산구 한강대로 100 (한강로2가) 6층</p>
+              <p>사업자번호: 104-86-58598</p>
+              <p>통신판매업신고번호 : 제 2017-서울용산-1293호</p>
+              <p><a href="#" title="사업자정보확인">사업자 정보 확인</a></p>
+              <p>개인정보보호책임자: 권세은</p>
+              <p>고객상담: <a href="#" title="number"></a>080-619-8888</p>
+              <p>이메일: espoirmall@espoir.com</p>
+              <p>호스팅제공자 : ㈜에스쁘아</p>
+              <p class="desc">고객님은 안전거래를 위해 현금 등으로 결제시 저희 쇼핑몰에서 가입한 이니시스 구매안전 서비스(에스크로)를 이용하실 수 있습니다.</p>
+              <p><a href="#" title="서비스가입사실확인">서비스 가입사실 확인</a></p>
+          </address>
+          <div id="copyright">
+              <p>Copyright ⓒ 2021 espoir. All Rights Reserved.</p>
+          </div>
+      </footer>
+  </div>
+ </body>
+</html>

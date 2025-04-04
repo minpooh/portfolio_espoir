@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+	<title>espoir</title>
+    <meta charset="utf-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /*############### reset ###############*/
+            *{margin:0; padding:0;}
+            header, footer, div, section, p, ul li{margin:0; padding:0;}
+            li{list-style-type:none;}
+            a:link, a:visited{text-decoration:none; color:#333;}
+            h3{width:1px; height:1px; position:absolute; left:-9999px; font-size:1px;}
+            img{border:none;}
+        
+        /*############### wrap ################*/
+            #wrap{width:100%;}
+
+        /*############## header ##############*/
+            #header{width:100%;}
+            h1{position:fixed; left:50px; top:50px; z-index:1;}
+
+        /*############# container ############*/
+            #container{width:100%; background-color:#f8d0ce;}
+
+        /*############# container / mix ##############*/
+            #mix{width:1200px; margin:0 auto; padding-top:100px; position:relative;}
+            #mix h2{font-size:50px; line-height:40px; text-align:center; font-family:  'Oswald', sans-serif;}
+            #mix h2 span{font-size:20px; font-weight:500;}
+
+        /*############# container / mix / mix_center ##############*/
+            #mix .mix_center{height:660px; margin:0 auto; position:relative; left:300px;}
+            #mix .mix_center .mix_case{width:550px; margin:0 auto; position:absolute;}
+            #mix .mix_center .mix_case img{width:100%;}
+
+            #mix .mix_center .mix_select{width:330px; height:330px; background-color:red; border-radius:165px; overflow:hidden; position:absolute; left:110px; top:110px;}
+            #mix .mix_center .mix_select p{width:165px; /*height:165px;*/ height:100%; position:absolute; left:0; top:0;}
+            #mix .mix_center .mix_select .select1{background-color:lightyellow;}
+            #mix .mix_center .mix_select .select2{background-color:lightpink; left:165px;}
+            #mix .mix_center .mix_select .select3{width:330px; background-color:lightblue; top:165px;}
+
+        /*############# container / mix / mix_left ##############*/
+            #mix .mix_left .select{width:290px; position:absolute; left:0; top:250px;}
+            #mix .mix_left .select li{width:90px; height:30px; text-align:center; text-transform:uppercase; float:left;}
+
+            #mix .mix_left .select:after{content:""; display:block; clear:both;}
+
+            #mix .mix_left .powder{width:296px; height:330px; overflow:hidden; position:absolute; left:0; top:320px;}
+            #mix .mix_left .powder li{width:50px; margin-right:20px; height:50px; margin-bottom:30px; border-radius:26px; border:2px solid #fff; overflow:hidden; float:left;}
+            #mix .mix_left .powder li img{width:800%;}
+            #mix .mix_left .powder li:hover{border:2px solid #d00; box-shadow:1px 1px 5px rgba(0,0,0,0.3);}
+            
+            #mix .mix_left .powder:after{content:""; display:block; clear:both;}
+            
+
+        /*############# container / mix / mix_right ##############*/
+            #mix .mix-right{width:230px; background-color:rgba(255,255,255,0.8); border-radius:10px; box-shadow:1px 1px 10px rgba(0,0,0,0.3); position:absolute; right:0; top:270px;}
+            #mix .mix-right h4{font-size:18px; text-indent:20px; padding-top:30px; font-family:'Oswald', sans-serif; letter-spacing:1px;}
+            #mix .mix-right p{padding-top:20px; text-indent:20px;}
+
+            #mix .mix-right .selected{width:100%; height:150px;}
+            #mix .mix-right .selected p{width:80%; height:40px; line-height:40px; padding-top:0; margin:10px auto 0; box-shadow:0 0 5px rgba(0,0,0,0.3); position:relative;}
+            #mix .mix-right .selected p input{display:block; text-indent:20px; height:40px; line-height:40px; border:none; background-color:rgba(0,0,0,0); font-weight:700;}
+            #mix .mix-right .selected p button{display:block; width:30px; height:30px; border:none; background-color:rgba(0,0,0,0); position:absolute; top:4px; right:0; cursor:pointer;}
+
+            #mix .mix-right .price{}
+            #mix .mix-right .price span{font-size:40px;}
+
+
+            #mix .mix-right #buyBtn{width:210px; height:40px; margin:10px; background-color:#333; color:#fff; border-radius:10px; cursor:pointer;}
+        
+
+        
+        /*############## footer ##############*/
+            #footer{width:100%; background-color:#000;}
+
+        /*############## footer / topMenu ##############*/
+            #footer .topMenu{width:1280px; height:300px; padding-top:50px; margin:0 auto;}
+            #footer .topMenu ul{float:left;}
+            #footer .topMenu ul li{margin-right:50px;}
+            #footer .topMenu a{color:#fff;}
+            
+            #footer .topMenu .left{width:300px;}
+            #footer .topMenu .left li{width:250px; line-height:40px;}
+            #footer .topMenu .left li a{font-size:17px;}
+
+            #footer .topMenu .right{width:700px;}
+            #footer .topMenu .right li{width:300px; float:left;}
+            
+            #footer .topMenu .right .title{font-size:20px;}
+            #footer .topMenu .right .title a{display:block;}
+            #footer .topMenu .right .title a span{display:block; padding-bottom:30px;}
+            #footer .topMenu .right .title a strong{display:block; font-size:25px;}
+            #footer .topMenu .right .text{padding-top:30px; color:#aaa; font-size:14px; line-height:20px;}
+            
+
+            #footer .topMenu .contact{width:280px;}
+            #footer .topMenu .contact li{margin:8px; float:left;}
+            #footer .topMenu .contact li a{display:block; width:27px; height:27px;}
+            #footer .topMenu .contact li a img{width:100%;}
+
+        /*############## footer / infoMenu ##############*/
+            #footer .infoMenu{width:1280px; margin:0 auto 20px;}
+            #footer .infoMenu ul{width:100%}
+            #footer .infoMenu li{display:inline;}
+            #footer .infoMenu li a{color:#fff; font-size:13px; padding-right:10px;}
+
+        /*############## footer / address ##############*/
+            #footer address{width:1280px; margin:0 auto; color:#aaa; font-style:normal; font-size:13px;}
+            #footer address p{display:inline; padding-right:10px;}
+            #footer address p a{color:#fff; text-decoration:underline;}
+        /*############## footer / copyright ##############*/
+            #copyright{width:100%;}
+            #copyright p{width:1280px; margin:0 auto; line-height:100px; font-size:13px; color:#aaa;}
+
+
+
+
+
+        /*############## pc버전 #############*/
+		@media all and (min-width:1025px){
+
+
+        }
+
+        /*############## 스마트폰 가로버전 #############*/
+		@media all and (min-width:481px) and (max-width:767px){
+            
+            /*############## header ##############*/
+                #header{width:100%;}
+                h1{width:80px; left:15px; top:15px;}
+                h1 a img{width:100%;}
+
+
+            /*############## footer / topMenu ##############*/
+                #footer .topMenu{width:300px; height:580px;}
+                #footer .topMenu ul li{margin-right:0;}
+                
+                #footer .topMenu .left{width:300px;}
+                #footer .topMenu .left li{width:250px;}
+
+                #footer .topMenu .right{width:300px;}
+                #footer .topMenu .right li{padding-top:50px;}
+
+                #footer .topMenu .right .customer{padding-top:20px; padding-bottom:30px;}
+                
+                #footer .topMenu .right .title{font-size:15px;}
+                #footer .topMenu .right .title a span{padding-bottom:10px;}
+                #footer .topMenu .right .title a strong{font-size:18px;}
+                #footer .topMenu .right .text{padding-top:10px; font-size:12px; line-height:17px;}
+                
+
+            /*############## footer / infoMenu ##############*/
+                #footer .infoMenu{width:300px;}
+                #footer .infoMenu li a{font-size:12px; padding-right:13px;}
+
+            /*############## footer / address ##############*/
+                #footer address{width:300px; font-size:11px;}
+                #footer address p{display:block; line-height:18px; padding-right:0;}
+
+                #footer address .desc{color:#777}
+                
+            /*############## footer / copyright ##############*/
+                #copyright p{width:300px;}
+
+        }
+        /*############## 스마트폰 세로버전 #############*/
+		@media all and (min-width:320px) and (max-width:480px){
+            
+            /*############## header ##############*/
+                #header{width:100%;}
+                h1{width:80px; left:15px; top:15px;}
+                h1 a img{width:100%;}
+
+
+            /*############## footer / topMenu ##############*/
+                #footer .topMenu{width:300px; height:580px;}
+                #footer .topMenu ul li{margin-right:0;}
+                
+                #footer .topMenu .left{width:300px;}
+                #footer .topMenu .left li{width:250px;}
+
+                #footer .topMenu .right{width:300px;}
+                #footer .topMenu .right li{padding-top:50px;}
+
+                #footer .topMenu .right .customer{padding-top:20px; padding-bottom:30px;}
+                
+                #footer .topMenu .right .title{font-size:15px;}
+                #footer .topMenu .right .title a span{padding-bottom:10px;}
+                #footer .topMenu .right .title a strong{font-size:18px;}
+                #footer .topMenu .right .text{padding-top:10px; font-size:12px; line-height:17px;}
+                
+
+            /*############## footer / infoMenu ##############*/
+                #footer .infoMenu{width:300px;}
+                #footer .infoMenu li a{font-size:12px; padding-right:13px;}
+
+            /*############## footer / address ##############*/
+                #footer address{width:300px; font-size:11px;}
+                #footer address p{display:block; line-height:18px; padding-right:0;}
+
+                #footer address .desc{color:#777}
+                
+            /*############## footer / copyright ##############*/
+                #copyright p{width:300px;}
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+
+            $(".powder li a").click(function(){
+
+                if($("#mix .mix_center .mix_select .select1 img").attr("src").substring(0,3)==""){
+                    $("#mix .mix_center .mix_select .select1 img").attr("src",$(this).children("img").attr("src"));
+                    $("#select1").attr("value",$(this).children("img").attr("alt"));
+                }
+                else if($("#mix .mix_center .mix_select .select1 img").attr("src").substring(0,3)=="img" && $("#mix .mix_center .mix_select .select2 img").attr("src").substring(0,3)==""){
+                    $("#mix .mix_center .mix_select .select2 img").attr("src",$(this).children("img").attr("src"));
+                    $("#select2").attr("value",$(this).children("img").attr("alt"));
+                }
+                else if($("#mix .mix_center .mix_select .select1 img").attr("src").substring(0,3)=="img" && $("#mix .mix_center .mix_select .select2 img").attr("src").substring(0,3)=="img"){
+                    $("#mix .mix_center .mix_select .select3 img").attr("src",$(this).children("img").attr("src"));
+                    $("#select3").attr("value",$(this).children("img").attr("alt"));
+                }
+            });
+
+            $(".powder li a").focus(function(){
+                $(".powder li").css({"border":"2px solid #fff","boxShadow":"1px 1px 5px rgba(0,0,0,0)"});
+                $(this).parent().css({"border":"2px solid #d00","boxShadow":"1px 1px 5px rgba(0,0,0,0.3)"});
+            });
+
+            $("#mix .mix_center .mix_select .select1 img").click(function(){
+                $(this).attr("src","");
+                $("#select1").attr("value","1");
+            });
+            $("#mix .mix_center .mix_select .select2 img").click(function(){
+                $(this).attr("src","");
+                $("#select2").attr("value","2");
+            });
+            $("#mix .mix_center .mix_select .select3 img").click(function(){
+                $(this).attr("src","");
+                $("#select3").attr("value","3");
+            });
+
+            $("#mix .mix-right .selected .select1").children("button").click(function(){
+                $("#mix .mix_center .mix_select .select1 img").attr("src","");
+                $("#select1").attr("value","1");
+                
+            });
+            $("#mix .mix-right .selected .select2").children("button").click(function(){
+                $("#mix .mix_center .mix_select .select2 img").attr("src","");
+                $("#select2").attr("value","2");
+            });
+            $("#mix .mix-right .selected .select3").children("button").click(function(){
+                $("#mix .mix_center .mix_select .select3 img").attr("src","");
+                $("#select3").attr("value","3");
+            });
+
+        });
+    </script>
+
+ </head>
+ <body>
+  <div id="wrap">
+      <header id="header">
+          <h1>
+              <a href="index.html" title="espoir">
+                  <img src="img/logo_b.png" alt="에스쁘아"/>
+              </a>
+          </h1>
+      </header>
+      <div id="container">
+          <section id="mix">
+              <h2>
+                  HANDMADE 파우더앤플레이<br/>
+                  <span>나만의 커스텀 파우더를 만들어보세요.</span>
+              </h2>
+              <div class="mix_center">
+                  <p class="mix_case">
+                      <img src="img/mix_bg.png" alt="케이스이미지"/>
+                  </p>
+                  <div class="mix_select">
+                      <p class="select1">
+                          <img src="" alt=""/>
+                      </p>
+                      <p class="select2">
+                          <img src="" alt=""/>
+                      </p>
+                      <p class="select3">
+                          <img src="" alt=""/>
+                      </p>
+                  </div>
+              </div>
+              <div class="mix_left">
+                  <ul class="select">
+                      <li>type</li>
+                      <li>color</li>
+                      <li>각인</li>
+                  </ul>
+                  <ul class="powder">
+                    <li>
+                        <a href="#none" title="오렌지피버">
+                            <img src="img/mix_pd0.jpeg" alt="오렌지피버"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="원더윙크">
+                            <img src="img/mix_pd1.jpeg" alt="원더윙크"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="만다린플리츠">
+                            <img src="img/mix_pd2.jpeg" alt="만다린플리츠"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="뮤트로즈">
+                            <img src="img/mix_pd3.jpeg" alt="뮤트로즈"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="로지클러치">
+                            <img src="img/mix_pd4.jpeg" alt="로지클러치"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="스퀘어댄스">
+                            <img src="img/mix_pd5.jpeg" alt="스퀘어댄스"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="하트펜던트">
+                            <img src="img/mix_pd6.jpeg" alt="하트펜던트"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="레드스틸레토">
+                            <img src="img/mix_pd7.jpeg" alt="레드스틸레토"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="로지플랫">
+                            <img src="img/mix_pd8.jpeg" alt="로지플랫"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="멜로드라마">
+                            <img src="img/mix_pd9.jpeg" alt="멜로드라마"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="유스">
+                            <img src="img/mix_pd10.jpeg" alt="유스"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="카멜브이넥">
+                            <img src="img/mix_pd11.jpeg" alt="카멜브이넥"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="카멜브이넥">
+                            <img src="img/mix_pd12.jpeg" alt="캐롯케이크"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="키스앤텔">
+                            <img src="img/mix_pd13.jpeg" alt="키스앤텔"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="오렌지피버">
+                            <img src="img/mix_pd14.jpeg" alt="팝핑오렌지"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="프레셔스코랄">
+                            <img src="img/mix_pd15.jpeg" alt="프레셔스코랄"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="핑크드라이브">
+                            <img src="img/mix_pd16.jpeg" alt="핑크드라이브"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="디바인로즈">
+                            <img src="img/mix_pd17.jpeg" alt="디바인로즈"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="러브미백">
+                            <img src="img/mix_pd18.jpeg" alt="러브미백"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="에나멜부츠">
+                            <img src="img/mix_pd19.jpeg" alt="에나멜부츠"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="핑키셀피">
+                            <img src="img/mix_pd20.jpeg" alt="핑키셀피"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="호텔아프리카">
+                            <img src="img/mix_pd21.jpeg" alt="호텔아프리카"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" title="오렌지피버">
+                            <img src="img/mix_pd22.jpeg" alt="오렌지피버"/>
+                        </a>
+                    </li>
+                  </ul>
+              </div>
+              <div class="mix-right">
+                  <h4>CHOOSE YOUR OPTION</h4>
+                  <p>핸드메이드 파우더</p>
+                  <div class="selected">
+                      <p class="select1"><input id="select1" type="text" title="select1" value="1" readonly/><button>x</button></button></p>
+                      <p class="select2"><input id="select2" type="text" title="select2" value="2"  readonly/><button>x</button></button></p>
+                      <p class="select3"><input id="select3" type="text" title="select3" value="3"  readonly/><button>x</button></button></p>
+                  </div>
+                  <p class="price">TOTAL&nbsp;&nbsp;&nbsp;&nbsp;<span>20.000</span></p>
+        
+                  <input id="buyBtn" type="button" title="buyBtn" value="BUY NOW"/>
+              </div>
+          </section>
+      </div>
+      <footer id="footer">
+          <div class="topMenu">
+              <ul class="left">
+                  <li><a href="#" title="비회원주문조회">비회원주문조회</a></li>
+                  <li><a href="#" title="매장찾기">매장 찾기</a></li>
+                  <li><a href="#" title="브랜드소개">브랜드 소개</a></li>
+                  <li><a href="#" title="멤버쉽">멤버쉽</a></li>
+                  <li><a href="#" title="사이트맵">사이트맵</a></li>
+              </ul>
+              <ul class="right">
+                <li>
+                    <p class="title">
+                        <a href="#" title="makeup">
+                            <span>MAKEUP</span>
+                            <strong>BEAUTY COUNSELING</strong>
+                        </a>
+                    </p>
+                    <p class="text">
+                        언제 어디서든 언택트!<br/>
+                        아티스트와 상담하세요!
+                    </p>
+                </li>
+                <li class="customer">
+                    <p class="title">
+                        <a href="#" title="makeup">
+                            <span>고객센터</span>
+                            <strong>080 619 8888</strong>
+                        </a>
+                    </p>
+                    <p class="text">
+                        상담시간 13:00 ~ 17:00<br/>
+                        (월~금, 공휴일 제외)
+                    </p>
+                </li>
+              </ul>
+              <ul class="contact">
+                <li>
+                    <a href="#" title="insta">
+                        <img src="img/ico_insta.png" alt="instagram"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="facebook">
+                        <img src="img/ico_facebook.png" alt="facebook"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="twitter">
+                        <img src="img/ico_twitter.png" alt="twitter"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="kako">
+                        <img src="img/ico_kakao.png" alt="kakao"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="blog">
+                        <img src="img/ico_blog.png" alt="blog"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="mail">
+                        <img src="img/ico_mail.png" alt="mail"/>
+                    </a>
+                </li>
+              </ul>
+          </div>
+          <div class="infoMenu">
+              <ul>
+                  <li><a href="#" title="서비스 이용약관">서비스 이용약관</a></li>
+                  <li><a href="#" title="개인정보처리방침">개인정보처리방침</a></li>
+                  <li><a href="#" title="영상기기관리방침">영상기기관리방침</a></li>
+                  <li><a href="#" title="사업자 정보 확인">사업자 정보 확인</a></li>
+                  <li><a href="#" title="이메일 무단수집 거부">이메일 무단수집 거부</a></li>
+                  <li><a href="#" title="전자공고">전자공고</a></li>
+              </ul>
+          </div>
+          <address>
+              <p>(주)에스쁘아 대표이사: 최민정</p>
+              <p>본사 : 서울특별시 용산구 한강대로 100 (한강로2가) 6층</p>
+              <p>사업자번호: 104-86-58598</p>
+              <p>통신판매업신고번호 : 제 2017-서울용산-1293호</p>
+              <p><a href="#" title="사업자정보확인">사업자 정보 확인</a></p>
+              <p>개인정보보호책임자: 권세은</p>
+              <p>고객상담: <a href="#" title="number"></a>080-619-8888</p>
+              <p>이메일: espoirmall@espoir.com</p>
+              <p>호스팅제공자 : ㈜에스쁘아</p>
+              <p class="desc">고객님은 안전거래를 위해 현금 등으로 결제시 저희 쇼핑몰에서 가입한 이니시스 구매안전 서비스(에스크로)를 이용하실 수 있습니다.</p>
+              <p><a href="#" title="서비스가입사실확인">서비스 가입사실 확인</a></p>
+          </address>
+          <div id="copyright">
+              <p>Copyright ⓒ 2021 espoir. All Rights Reserved.</p>
+          </div>
+      </footer>
+  </div>
+ </body>
+</html>

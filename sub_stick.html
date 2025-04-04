@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+	<title>espoir</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /*############### reset ###############*/
+            *{margin:0; padding:0;}
+            li{list-style-type:none;}
+            a:link, a:visited{text-decoration:none; color:#333;}
+            h3{width:1px; height:1px; position:absolute; left:-9999px; font-size:1px;}
+        
+        /*############### wrap ################*/
+            #wrap{width:100%;}
+
+        
+        
+        /*############## header ##############*/
+            #header{width:100%;}
+            h1{position:fixed; left:50px; top:50px; z-index:1;}
+
+            .nav_m_btn{display:none; position:fixed; left:15px; top:60px; z-index:1; font-family:'Oswald', sans-serif; font-weight:400;}
+
+        /*############## header / nav / nav(div) ##############*/
+            nav{width:100%;}
+
+            #nav{width:100%; height:100px; position:absolute; left:0; top:0; z-index:3;}
+            #nav_tit, #nav_inn_shop, #nav_inn_artist, #nav_inn_play, #nav_inn_community{width:60%; position:absolute; left:25%; top:50px; z-index:2;}
+            #nav_tit li{width:25%; text-align:center; float:left; transition:transform 0.5s linear 0.2s;}
+			
+			#nav_tit{transform:rotatex(0deg); transition:transform 0.3s linear;}
+			#nav_inn_shop, #nav_inn_artist, #nav_inn_play, #nav_inn_community{transform:rotatex(-90deg); transition:transform 0.3s linear;}
+
+            #nav ol li{text-align:center; float:left; height:30px;}
+            #nav_inn_shop li{width:16%;}
+            #nav_inn_community li{width:20%;}
+            #nav_inn_artist li, #nav_inn_play li{width:40%;}
+
+            #nav ul li a, #nav ol li a{padding:0 10px; color:#333; text-transform:uppercase; }
+            #nav ul li a:link, #nav ul li a:visited, #nav ol li a:link, #nav ol li a:visited{font-size:20px; font-family:'Oswald', sans-serif; font-weight:500; letter-spacing:1px;}
+            #nav ul li a:hover, #nav ul li a:focus, #nav ol li a:hover, #nav ol li a:focus{color:#f00;}
+        
+
+            #nav:after, #nav ul:after{content:""; display:block; clear:both;}
+
+            #top_menu{width:10%; position:fixed; right:30px; top:50px; z-index:3;}
+            #top_menu p{width:50%; float:left; font-size:15px; font-weight:500;}
+            #top_menu p a:hover, #top_menu a:focus{color:#fff;}
+            
+            #top_menu:after{content:""; display:block; clear:both;}
+            
+            
+        /*############## header / nav / nav_m(div) ##############*/
+            #nav_m{width:320px; position:fixed; left:-320px; top:0; z-index:2; transition:all 0.5s linear;}
+            #nav_m ul{width:100%; padding-top:20px; padding-bottom:20px; background-color:#Fff;}
+            #nav_m ul li{width:100%; text-indent:20px;}
+
+            #nav_m ul li a{text-transform:uppercase;}
+            #nav_m ul li a:link, a:visited{font-size:15px; font-family:'Oswald', sans-serif; letter-spacing:1px;}
+            #nav_m ul li a:hover, a:focus{background-color:#333; color:#fff;}
+
+            #nav_m ul .tit a:link, a:visited{font-size:20px; font-weight:500;}
+
+
+
+
+
+        /*############# container ############*/
+            #container{width:100%;}
+        
+        /*############### main #############*/
+            #main{width:100%; position:relative;}
+           
+            #main .bg{width:100%; overflow:hidden;}
+            #main .main_bg_m{display:none;}
+            #main .bg img{width:120%;}
+
+        /*############### main / desc #############*/
+            #main .desc{width:500px; background-color:rgba(255,255,255,0.8); position:absolute; right:80px; top:150px; text-align:center;}
+            #main .desc p{width:400px; margin:0 auto;}
+            #main .desc .tag{padding-top:10px; line-height:50px;}
+            #main .desc .name{font-weight:500; font-size:30px; font-family:'Oswald', sans-serif;}
+            #main .desc .price{padding-top:10px; padding-bottom:30px;}
+            #main .desc .price .line{text-decoration:line-through; color:#aaa;}
+            #main .desc .price .sale{font-weight:600;}
+            #main .desc .price strong{font-size:20px;}
+
+        /*############### main / priceArea #############*/
+            #main .priceArea{width:500px; background-color:rgba(255,255,255,0.8); position:absolute; right:80px; top:370px;}
+            #main .priceArea .title{font-size:24px; text-align:center; text-transform:uppercase; font-weight:400; padding-top:30px; font-family:'Oswald', sans-serif;}
+            #main .priceArea .kg{text-indent:30px; line-height:50px;}
+
+            #main .priceArea .color{margin-bottom:10px;}
+            #main .priceArea .color span{display:inline-block; width:28px; height:28px; border-radius:16px; border:2px solid rgba(0,0,0,0); background-color:#f1dcc5; margin-left:30px; cursor:pointer;}
+            #main .priceArea .color .color2{background-color:#f3dabb;}
+            #main .priceArea .color .color3{background-color:#f2d5b1;}
+            #main .priceArea .color .color4{background-color:#f3d3ac;}
+
+            #main .priceArea .color span:hover{border:2px solid #fff; box-shadow:1px 1px 5px rgba(0,0,0,0.5);}
+
+            #main .priceArea .select{width:445px; margin-left:20px; border-bottom:1px solid #333;} 
+            #main .priceArea .select select{width:400px; height:40px; margin-bottom:20px; text-indent:20px; background-color:rgba(0,0,0,0); color:#333; font-size:18px; border:1px solid #ccc;} 
+            #main .priceArea .select #btn{width:40px; height:40px; background-color:rgba(0,0,0,0); color:#333; font-size:20px; border:1px solid #ccc; cursor:pointer;}
+
+
+            #main .priceArea .numb{width:445px; margin-left:20px; padding-top:20px; padding-bottom:20px; border-bottom:1px solid #333; font-size:20px;}
+            #main .priceArea .numb input{width:180px; text-indent:20px; border:none; background-color:rgba(0,0,0,0); font-size:20px;}
+            #main .priceArea .numb #num{width:50px; text-indent:0; text-align:center;}
+            #main .priceArea .numb span{display:inline-block; width:30px; height:30px; line-height:30px; text-align:center; border:1px solid #333; cursor:pointer;}
+            #main .priceArea .numb #price{width:140px; text-indent:0; text-align:right;}
+
+
+            #main .priceArea .total{height:100px; line-height:80px; margin-left:20px; padding-top:20px; font-family:'Oswald', sans-serif;}
+            #main .priceArea .total label{font-size:30px; text-transform:uppercase; margin-left:20px; font-family:'Oswald', sans-serif;}
+            #main .priceArea .total #total{width:350px; border:none; background-color:rgba(0,0,0,0); text-align:right; font-size:30px; font-weight:700;}
+
+            #main .buy{position:absolute; right:80px; top:720px;}
+            #main .buy p{height:50px; float:left;}
+            #main #buyBtn{width:450px; line-height:50px; background-color:#000; color:#fff; border:none; font-size:30px; font-family:'Oswald', sans-serif; text-align:center;}
+            #main .buy .bsk{width:45px; height:48px; border:1px solid #000; margin-left:5px;}
+            #main .buy .bsk img{width:100%;}
+
+            #main .but:after{content:""; display:block; clear:both;}
+        
+        
+        /*############## footer ##############*/
+            #footer{width:100%; background-color:#000;}
+
+        /*############## footer / topMenu ##############*/
+            #footer .topMenu{width:1280px; height:300px; padding-top:50px; margin:0 auto;}
+            #footer .topMenu ul{float:left;}
+            #footer .topMenu ul li{margin-right:50px;}
+            #footer .topMenu a{color:#fff;}
+            
+            #footer .topMenu .left{width:300px;}
+            #footer .topMenu .left li{width:250px; line-height:40px;}
+            #footer .topMenu .left li a{font-size:17px;}
+
+            #footer .topMenu .right{width:700px;}
+            #footer .topMenu .right li{width:300px; float:left;}
+            
+            #footer .topMenu .right .title{font-size:20px;}
+            #footer .topMenu .right .title a{display:block;}
+            #footer .topMenu .right .title a span{display:block; padding-bottom:30px;}
+            #footer .topMenu .right .title a strong{display:block; font-size:25px;}
+            #footer .topMenu .right .text{padding-top:30px; color:#aaa; font-size:14px; line-height:20px;}
+            
+
+            #footer .topMenu .contact{width:280px;}
+            #footer .topMenu .contact li{margin:8px; float:left;}
+            #footer .topMenu .contact li a{display:block; width:27px; height:27px;}
+            #footer .topMenu .contact li a img{width:100%;}
+
+        /*############## footer / infoMenu ##############*/
+            #footer .infoMenu{width:1280px; margin:0 auto 20px;}
+            #footer .infoMenu ul{width:100%}
+            #footer .infoMenu li{display:inline;}
+            #footer .infoMenu li a{color:#fff; font-size:13px; padding-right:10px;}
+
+        /*############## footer / address ##############*/
+            #footer address{width:1280px; margin:0 auto; color:#aaa; font-style:normal; font-size:13px;}
+            #footer address p{display:inline; padding-right:10px;}
+            #footer address p a{color:#fff; text-decoration:underline;}
+        /*############## footer / copyright ##############*/
+            #copyright{width:100%;}
+            #copyright p{width:1280px; margin:0 auto; line-height:100px; font-size:13px; color:#aaa;}
+
+
+            
+        /*############## pc버전 #############*/
+		@media all and (min-width:1025px){
+            
+           
+        }
+
+
+
+        /*############## 스마트폰 세로버전 #############*/
+		@media all and (min-width:320px) and (max-width:480px){
+            
+            /*############## header ##############*/
+                #header{width:100%;}
+                h1{width:80px; left:15px; top:15px;}
+                h1 a img{width:100%;}
+
+                
+        
+
+            
+
+            /*############## footer / topMenu ##############*/
+                #footer .topMenu{width:300px; height:580px; margin:0; padding-left:20px;}
+                #footer .topMenu ul li{margin-right:0;}
+                
+                #footer .topMenu .left{width:300px;}
+                #footer .topMenu .left li{width:250px;}
+
+                #footer .topMenu .right{width:300px;}
+                #footer .topMenu .right li{padding-top:50px;}
+
+                #footer .topMenu .right .customer{padding-top:20px; padding-bottom:30px;}
+                
+                #footer .topMenu .right .title{font-size:15px;}
+                #footer .topMenu .right .title a span{padding-bottom:10px;}
+                #footer .topMenu .right .title a strong{font-size:18px;}
+                #footer .topMenu .right .text{padding-top:10px; font-size:12px; line-height:17px;}
+                
+
+            /*############## footer / infoMenu ##############*/
+                #footer .infoMenu{width:300px; margin:0; padding-left:20px;}
+                #footer .infoMenu li a{font-size:12px; padding-right:13px;}
+
+            /*############## footer / address ##############*/
+                #footer address{width:300px; font-size:11px; margin:0; padding-left:20px;}
+                #footer address p{display:block; line-height:18px; padding-right:0;}
+
+                #footer address .desc{color:#777}
+                
+            /*############## footer / copyright ##############*/
+                #copyright p{width:300px; margin:0; padding-left:20px;}
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+
+            /*######## header ########*/
+            $("#nav_m").hide();
+
+            $(".nav_m_btn").click(function(){
+                $("#nav_m").css({"left":"0"});
+            });
+
+            $("#nav_m").mouseover(function(){
+                $(this).stop().show();
+            }).mouseout(function(){
+                $(this).css({"left":"-320px"});
+            });
+
+
+            $("#nav_tit li:eq(0) a").bind("focusin mouseover",function(){
+                $("#nav ol").css({"transform":"rotatex(-90deg)"});
+                $(this).parent().parent().css({"transform":"rotatex(-90deg)"});
+                $("#nav_inn_shop").css({"transform":"rotatex(0deg)"});
+            });
+            $("#nav_tit li:eq(1) a").bind("focusin mouseover",function(){
+                $("#nav ol").css({"transform":"rotatex(-90deg)"});
+                $(this).parent().parent().css({"transform":"rotatex(-90deg)"});
+                $("#nav_inn_artist").css({"transform":"rotatex(0deg)"});
+            });
+            $("#nav_tit li:eq(2) a").bind("focusin mouseover",function(){
+                $("#nav ol").css({"transform":"rotatex(-90deg)"});
+                $(this).parent().parent().css({"transform":"rotatex(-90deg)"});
+                $("#nav_inn_play").css({"transform":"rotatex(0deg)"});
+            });
+            $("#nav_tit li:eq(3) a").bind("focusin mouseover",function(){
+                $("#nav ol").css({"transform":"rotatex(-90deg)"});
+                $(this).parent().parent().css({"transform":"rotatex(-90deg)"});
+                $("#nav_inn_community").css({"transform":"rotatex(0deg)"});
+            });
+
+            $("nav").bind("blur mouseleave",function(){
+                $("nav ol").css({"transform":"rotatex(-90deg)"});
+                $("#nav_tit").css({"transform":"rotatex(0deg)"});
+            });
+
+
+            /*######## container ########*/
+            $("#main .priceArea .numb").hide();
+        
+
+            $("#btn").click(function(){
+                $("#main .buy").css({"top":"800px"});
+                $("#main .priceArea .numb").show();
+            });
+            
+        });
+    </script>
+    <script>
+        function btn(){
+            var selected=document.getElementById("selected");
+            var option=document.getElementById("option");
+            var total=document.getElementById("total");
+
+            selected.value=option.value;
+
+            total.value=19600*num.value;
+
+            //console.log(selected);
+            //console.log(option);
+        }
+        
+        function plusBtn(){
+            var num=document.getElementById("num");
+            var price=document.getElementById("price");
+            var total=document.getElementById("total");
+
+
+            var number=parseInt(num.value);
+
+            num.value=number+1;
+            total.value=19600*num.value;
+        }
+
+        function minusBtn(){
+            var num=document.getElementById("num");
+            var price=document.getElementById("price");
+            var total=document.getElementById("total");
+
+
+            var number=parseInt(num.value);
+
+            num.value=number-1;
+            total.value=total.value-19600;
+
+            if(number==1){
+                num.value=1;
+                total.value=19600;
+            }
+
+        }
+
+        
+
+    </script>
+ </head>
+ <body>
+  <div id="wrap">
+      <header id="header">
+        <h1>
+            <a href="#" title="espoir">
+                <img src="img/logo_b.png" alt="에스쁘아"/>
+            </a>
+        </h1>
+        <p class="nav_m_btn">MENU &gt;</p>
+        <nav>
+            <div id="nav">
+              <ul id="nav_tit">
+                  <li><a href="#" title="SHOP">SHOP</a></li>
+                  <li><a href="#" title="ARTIST SERVICE">ARTIST SERVICE</a></li>
+                  <li><a href="#" title="nPLAY">&amp; PLAY</a></li>
+                  <li><a href="#" title="COMMUNITY">COMMUNITY</a></li>
+              </ul>
+              <ol id="nav_inn_shop">
+                  <li><a href="sub_best.html" title="best">best</a></li>
+                  <li><a href="sub_lip.html" title="lip">lip</a></li>
+                  <li><a href="sub_eye.html" title="eye">eye</a></li>
+                  <li><a href="sub_face.html" title="face">face</a></li>
+                  <li><a href="sub_sun.html" title="sun">sun</a></li>
+                  <li><a href="#" title="lookbook">lookbook</a></li>
+              </ol>
+          
+              <ol id="nav_inn_artist">
+                  <li><a href="#" title="ONLINE CONSULTING">ONLINE CONSULTING</a></li>
+                  <li><a href="#" title="OFFLINE CONSULTING">OFFLINE CONSULTING</a></li>
+              </ol>
+          
+              <ol id="nav_inn_play">
+                  <li><a href="sub_mix.html" title="powdernplay">powder &amp; play</a></li>
+                  <li><a href="sub_mix.html" title="glitternplay">gitter &amp; play</a></li>
+              </ol>
+          
+              <ol id="nav_inn_community">
+                  <li><a href="#" title="notice">notice</a></li>
+                  <li><a href="sub_QnA.html" title="QnA">Q&amp;A</a></li>
+                  <li><a href="#" title="event">event</a></li>
+                  <li><a href="#" title="review">review</a></li>
+                  <li><a href="#" title="store">store</a></li>
+              </ol>
+                  
+            </div>
+            <div id="nav_m">
+              <ul>
+                  <li class="tit"><a href="#" title="SHOP">SHOP</a></li>
+                  <li><a href="sub_best.html" title="best">best</a></li>
+                  <li><a href="sub_lip.html" title="lip">lip</a></li>
+                  <li><a href="sub_eye.html" title="eye">eye</a></li>
+                  <li><a href="sub_face.html" title="face">face</a></li>
+                  <li><a href="sub_sun.html" title="sun">sun</a></li>
+                  <li class="tit"><a href="#" title="ARTIST SERVICE">ARTIST SERVICE</a></li>
+                  <li><a href="#" title="ONLINE CONSULTING">ONLINE CONSULTING</a></li>
+                  <li><a href="#" title="OFFLINE CONSULTING">OFFLINE CONSULTING</a></li>
+                  <li class="tit"><a href="#" title="nPLAY">&amp; PLAY</a></li>
+                  <li><a href="sub_mix.html" title="powdernplay">powder &amp; play</a></li>
+                  <li><a href="sub_mix.html" title="glitternplay">gitter &amp; play</a></li>
+                  <li class="tit"><a href="#" title="COMMUNITY">COMMUNITY</a></li>
+                  <li><a href="#" title="notice">notice</a></li>
+                  <li><a href="sub_QnA.html" title="QnA">Q&amp;A</a></li>
+                  <li><a href="#" title="event">event</a></li>
+                  <li><a href="#" title="review">review</a></li>
+                  <li><a href="#" title="store">store</a></li>
+              </ul>
+            </div>
+            <div id="top_menu">
+                <p><a href="#" title="로그인">로그인</a></p>
+                <p><a href="#" title="회원가입">회원가입</a></p>
+            </div>
+        </nav>
+      </header>
+      <div id="container">
+          <section id="main">
+              <h3>main</h3>
+              <div class="bg">
+                  <p class="main_bg">
+                      <img src="img/bg_stick.jpeg" alt="stick 배경"/>
+                  </p>
+                  <p class="main_bg_m">
+                      <img src="img/bg_stick_m.jpeg" alt="stick 모바일 배경"/>
+                  </p>
+              </div>
+              <div class="desc">
+                  <p class="tag">#광채커버스틱 #촘촘밀착</p>
+                  <p class="name">PRO TAILOR BE GLOW STICK FOUNDATION SPF42 PA+++</p>
+                  <p class="price">
+                    <span class="line">￦ 28,000</span> <span class="sale">[30%]</span> <strong>￦ 19,600</strong>
+                  </p>
+              </div>
+              <div class="priceArea">
+                  <p class="title">choose your options</p>
+                  <p class="kg">4colors / 13g</p>
+                  <p class="color"><span class="color1"></span><span class="color2"></span><span class="color3"></span><span class="color4"></span></p>
+                  <p class="select">
+                      <select id="option">
+                          <option value="1호 바닐라">1호 바닐라</option>
+                          <option value="2호 아이보리">2호 아이보리</option>
+                          <option value="3호 페탈">3호 페탈</option>
+                          <option value="4호 베이지">4호 베이지</option>
+                      </select>
+                      <input id="btn" type="button" value="+" title="+" onclick="btn();"/>
+                  </p>
+                  <div class="numb">
+                      <input id="selected" type="text" title="selected" value="selected" readonly/>
+                      <span id="minus" onclick="minusBtn();">-</span><input id="num" type="text" title="num" value=1 min=1 readonly/><span id="plus" onclick="plusBtn();">+</span>
+                      <input id="price" type="text" title="price" value="19,600" readonly/>
+                  </div>
+                  <p class="total"><label for="total">total</label><input id="total" type="text" title="total" value=0 readonly/></p>
+              </div>
+              <div class="buy">
+                  <p><input id="buyBtn" type="button" name="buyBtn" value="BUY NOW"/></p>
+                  <p class="bsk"><img src="img/ico_bsk.png" alt="장바구니"/></p>
+              </div>
+          </section>
+      </div>
+      <footer id="footer">
+          <div class="topMenu">
+              <ul class="left">
+                  <li><a href="#" title="비회원주문조회">비회원주문조회</a></li>
+                  <li><a href="#" title="매장찾기">매장 찾기</a></li>
+                  <li><a href="#" title="브랜드소개">브랜드 소개</a></li>
+                  <li><a href="#" title="멤버쉽">멤버쉽</a></li>
+                  <li><a href="#" title="사이트맵">사이트맵</a></li>
+              </ul>
+              <ul class="right">
+                <li>
+                    <p class="title">
+                        <a href="#" title="makeup">
+                            <span>MAKEUP</span>
+                            <strong>BEAUTY COUNSELING</strong>
+                        </a>
+                    </p>
+                    <p class="text">
+                        언제 어디서든 언택트!<br/>
+                        아티스트와 상담하세요!
+                    </p>
+                </li>
+                <li>
+                    <p class="title">
+                        <a href="#" title="makeup">
+                            <span>고객센터</span>
+                            <strong>080 619 8888</strong>
+                        </a>
+                    </p>
+                    <p class="text">
+                        상담시간 13:00 ~ 17:00<br/>
+                        (월~금, 공휴일 제외)
+                    </p>
+                </li>
+              </ul>
+              <ul class="contact">
+                <li>
+                    <a href="#" title="insta">
+                        <img src="img/ico_insta.png" alt="instagram"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="facebook">
+                        <img src="img/ico_facebook.png" alt="facebook"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="twitter">
+                        <img src="img/ico_twitter.png" alt="twitter"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="kako">
+                        <img src="img/ico_kakao.png" alt="kakao"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="blog">
+                        <img src="img/ico_blog.png" alt="blog"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="mail">
+                        <img src="img/ico_mail.png" alt="mail"/>
+                    </a>
+                </li>
+              </ul>
+          </div>
+          <div class="infoMenu">
+              <ul>
+                  <li><a href="#" title="서비스 이용약관">서비스 이용약관</a></li>
+                  <li><a href="#" title="개인정보처리방침">개인정보처리방침</a></li>
+                  <li><a href="#" title="영상기기관리방침">영상기기관리방침</a></li>
+                  <li><a href="#" title="사업자 정보 확인">사업자 정보 확인</a></li>
+                  <li><a href="#" title="이메일 무단수집 거부">이메일 무단수집 거부</a></li>
+                  <li><a href="#" title="전자공고">전자공고</a></li>
+              </ul>
+          </div>
+          <address>
+              <p>(주)에스쁘아 대표이사: 최민정</p>
+              <p>본사 : 서울특별시 용산구 한강대로 100 (한강로2가) 6층</p>
+              <p>사업자번호: 104-86-58598</p>
+              <p>통신판매업신고번호 : 제 2017-서울용산-1293호</p>
+              <p><a href="#" title="사업자정보확인">사업자 정보 확인</a></p>
+              <p>개인정보보호책임자: 권세은</p>
+              <p>고객상담: <a href="#" title="number"></a>080-619-8888</p>
+              <p>이메일: espoirmall@espoir.com</p>
+              <p>호스팅제공자 : ㈜에스쁘아</p>
+              <p>고객님은 안전거래를 위해 현금 등으로 결제시 저희 쇼핑몰에서 가입한 이니시스 구매안전 서비스(에스크로)를 이용하실 수 있습니다.</p>
+              <p><a href="#" title="서비스가입사실확인">서비스 가입사실 확인</a></p>
+          </address>
+          <div id="copyright">
+              <p>Copyright ⓒ 2021 espoir. All Rights Reserved.</p>
+          </div>
+      </footer>
+  </div>
+ </body>
+</html>
